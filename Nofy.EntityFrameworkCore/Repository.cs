@@ -1,18 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Nofy.EntityFrameworkCore.DataAccess;
-using Nofy.Core.Helper;
-using Nofy.Core;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.Extensions.DependencyInjection;
+using Nofy.Core;
+using Nofy.Core.Helper;
 using Nofy.Core.Model;
+using Nofy.EntityFrameworkCore.DataAccess;
 
 namespace Nofy.EntityFrameworkCore
 {
+	/// <summary>
+	/// Represent notification repository to manipulate notification data.
+	/// </summary>
 	public class Repository : IRepository
 	{
 		internal readonly NotificationsDbContext DbContext;
 
+		/// <summary>
+		/// Initialize new instance of repository
+		/// </summary>
+		/// <param name="connectionString"></param>
 		public Repository(string connectionString)
 		{
 			var optionsBuilder = new DbContextOptionsBuilder<NotificationsDbContext>();
@@ -20,6 +30,11 @@ namespace Nofy.EntityFrameworkCore
 			DbContext = new NotificationsDbContext(optionsBuilder.Options);
 		}
 
+		/// <summary>
+		/// Add List of notifications
+		/// </summary>
+		/// <param name="notifications"></param>
+		/// <returns></returns>
 		public int AddRange(List<Notification> notifications)
 		{
 			DbContext.Notifications.AddRange(notifications.Select(n => new NotificationModel
@@ -42,7 +57,11 @@ namespace Nofy.EntityFrameworkCore
 			return DbContext.SaveChanges();
 		}
 
-
+		/// <summary>
+		/// Update notification status to be archived
+		/// </summary>
+		/// <param name="notificationId"></param>
+		/// <returns></returns>
 		public int Archive(int notificationId)
 		{
 			var notification = DbContext.Notifications.Find(notificationId);
@@ -58,12 +77,27 @@ namespace Nofy.EntityFrameworkCore
 			return -1;
 		}
 
+
+		/// <summary>
+		/// Get notification by Id
+		/// </summary>
+		/// <param name="notificationId"></param>
+		/// <returns></returns>
 		public Notification GetNotification(int notificationId)
 		{
 			var notification = DbContext.Notifications.Find(notificationId);
 			return notification == null ? null : Notification.Load(notification);
 		}
 
+
+		/// <summary>
+		/// Get all notifications for recipients
+		/// </summary>
+		/// <param name="recipients"></param>
+		/// <param name="pageIndex"></param>
+		/// <param name="pageSize"></param>
+		/// <param name="showArchived"></param>
+		/// <returns></returns>
 		public PaginatedData<Notification> GetNotifications(IEnumerable<NotificationRecipient> recipients,
 			int pageIndex, int pageSize, bool showArchived)
 		{
@@ -89,6 +123,12 @@ namespace Nofy.EntityFrameworkCore
 			};
 		}
 
+
+		/// <summary>
+		/// Undo archive notification
+		/// </summary>
+		/// <param name="notificationId"></param>
+		/// <returns></returns>
 		public int UnArchive(int notificationId)
 		{
 			var notification = DbContext.Notifications.Find(notificationId);
@@ -102,6 +142,16 @@ namespace Nofy.EntityFrameworkCore
 				return DbContext.SaveChanges();
 			}
 			return -1;
+		}
+
+
+		/// <summary>
+		/// Run initialization migration.
+		/// </summary>
+		public void InitializeMigration()
+		{
+			var migrator = DbContext.GetInfrastructure().GetRequiredService<IMigrator>();
+			migrator.Migrate("init");
 		}
 	}
 }

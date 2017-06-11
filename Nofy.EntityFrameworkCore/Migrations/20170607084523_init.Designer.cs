@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Nofy.EntityFrameworkCore.DataAccess;
-using Nofy.Core;
 
 namespace Nofy.EntityFrameworkCore.Migrations
 {
