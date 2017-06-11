@@ -20,16 +20,14 @@ namespace Nofy.Core
 		/// <summary>
 		/// Initialize new instance of notification service
 		/// </summary>
-		/// <param name="config">Service's configuration</param>
 		/// <param name="repository">Service's repository</param>
-		public NotificationService(Configurations config, IRepository repository)
+		public NotificationService( IRepository repository)
 		{
-			Config = config;
 			_repository = repository;
 		}
 
 		//Service configurations
-		public Configurations Config { get; }
+		public Configurations Config { get; set; }
 
 		//Make sure to dispose all resources
 		public void Dispose()
