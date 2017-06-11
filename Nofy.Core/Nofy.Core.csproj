@@ -2,6 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard1.4</TargetFramework>
+	  <PackageId>Nofy.Core</PackageId>
+	  <PackageVersion>0.0.7-beta</PackageVersion>
+	  <Authors>UNOPS</Authors>
+	  <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+	  <Copyright>Copyright 2017 (c) UNOPS. All rights reserved.</Copyright>
   </PropertyGroup>
 
   <ItemGroup>

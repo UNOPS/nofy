@@ -24,6 +24,10 @@ namespace Nofy.Core
 		public NotificationService( IRepository repository)
 		{
 			_repository = repository;
+			Config = new Configurations
+			{
+				BatchLimit = 0
+			};
 		}
 
 		//Service configurations
