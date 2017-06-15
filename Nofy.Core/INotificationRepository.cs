@@ -3,7 +3,7 @@
 	using System.Collections.Generic;
 	using Nofy.Core.Helper;
 
-	public interface IRepository
+	public interface INotificationRepository
 	{
 		/// <summary>
 		/// Add list of notifications

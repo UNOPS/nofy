@@ -4,9 +4,6 @@
 	using System.Collections.Generic;
 	using System.Linq;
 	using Microsoft.EntityFrameworkCore;
-	using Microsoft.EntityFrameworkCore.Infrastructure;
-	using Microsoft.EntityFrameworkCore.Migrations;
-	using Microsoft.Extensions.DependencyInjection;
 	using Nofy.Core;
 	using Nofy.Core.Helper;
 	using Nofy.Core.Model;
@@ -15,7 +12,7 @@
 	/// <summary>
 	/// Represent notification repository to manipulate notification data.
 	/// </summary>
-	public class Repository : IRepository
+	public class NotificationRepository : INotificationRepository
 	{
 		internal readonly NotificationsDbContext DbContext;
 
@@ -23,7 +20,7 @@
 		/// Initialize new instance of repository
 		/// </summary>
 		/// <param name="connectionString"></param>
-		public Repository(string connectionString)
+		public NotificationRepository(string connectionString)
 		{
 			var optionsBuilder = new DbContextOptionsBuilder<NotificationsDbContext>();
 			optionsBuilder.UseSqlServer(connectionString);
@@ -40,7 +37,7 @@
 			this.DbContext.Notifications.AddRange(notifications.Select(n => new NotificationModel
 			{
 				Status = n.Status,
-				DateCreated = n.CreatedOn,
+				CreatedOn = n.CreatedOn,
 				Description = n.Description,
 				EntityId = n.EntityId,
 				EntityType = n.EntityType,

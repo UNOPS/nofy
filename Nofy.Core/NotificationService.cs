@@ -11,19 +11,19 @@
 	{
 		private readonly object lockKey = new object();
 
+		//Notification repository
+		private readonly INotificationRepository notificationRepository;
+
 		//Temporary list of notification 
 		private readonly List<Notification> notifications = new List<Notification>();
-
-		//Notification repository
-		private readonly IRepository repository;
 
 		/// <summary>
 		/// Initialize new instance of notification service
 		/// </summary>
-		/// <param name="repository">Service's repository</param>
-		public NotificationService(IRepository repository)
+		/// <param name="notificationRepository">Service's repository</param>
+		public NotificationService(INotificationRepository notificationRepository)
 		{
-			this.repository = repository;
+			this.notificationRepository = notificationRepository;
 			this.Config = new NotificationServiceConfiguration
 			{
 				BatchLimit = 0
@@ -46,7 +46,7 @@
 		/// <param name="id">Notification id</param>
 		public void Archive(int id)
 		{
-			this.repository.Archive(id);
+			this.notificationRepository.Archive(id);
 		}
 
 		/// <summary>
@@ -56,7 +56,7 @@
 		/// <returns></returns>
 		public Notification GetNotification(int notificationId)
 		{
-			return this.repository.GetNotification(notificationId);
+			return this.notificationRepository.GetNotification(notificationId);
 		}
 
 		/// <summary>
@@ -73,7 +73,7 @@
 			int pageSize,
 			bool showArchived)
 		{
-			return this.repository.GetNotifications(recipients, pageIndex, pageSize, showArchived);
+			return this.notificationRepository.GetNotifications(recipients, pageIndex, pageSize, showArchived);
 		}
 
 		public void Publish(Notification n)
@@ -95,7 +95,7 @@
 		/// <param name="id">Notification id</param>
 		public void UnArchive(int id)
 		{
-			this.repository.UnArchive(id);
+			this.notificationRepository.UnArchive(id);
 		}
 
 		/// <summary>
@@ -122,7 +122,7 @@
 					return;
 				}
 
-				this.repository.AddRange(this.notifications);
+				this.notificationRepository.AddRange(this.notifications);
 				this.notifications.Clear();
 			}
 		}

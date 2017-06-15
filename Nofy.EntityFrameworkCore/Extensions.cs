@@ -7,6 +7,13 @@
 
 	internal static class Extensions
 	{
+		public static void AddConfiguration<TEntity>(
+			this ModelBuilder modelBuilder,
+			DbEntityConfiguration<TEntity> entityConfiguration) where TEntity : class
+		{
+			modelBuilder.Entity<TEntity>(entityConfiguration.Configure);
+		}
+
 		public static PaginatedData<T> Paginate<T>(
 			this IQueryable<T> query,
 			int pageNum,
@@ -34,13 +41,6 @@
 				Results = query.Skip(excludedRows).Take(Math.Min(pageSize, rowsCount)).ToArray(),
 				TotalCount = rowsCount
 			};
-		}
-
-		public static void AddConfiguration<TEntity>(
-			this ModelBuilder modelBuilder,
-			DbEntityConfiguration<TEntity> entityConfiguration) where TEntity : class
-		{
-			modelBuilder.Entity<TEntity>(entityConfiguration.Configure);
 		}
 	}
 }

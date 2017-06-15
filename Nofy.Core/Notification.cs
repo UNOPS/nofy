@@ -10,7 +10,7 @@
 		private readonly ICollection<NotificationAction> actions = new List<NotificationAction>();
 
 		public Notification(
-			string desc,
+			string description,
 			string entityType,
 			string entityId,
 			string recipientType,
@@ -19,7 +19,7 @@
 			int? category,
 			params NotificationAction[] actions)
 		{
-			this.Description = desc;
+			this.Description = description;
 			this.EntityType = entityType;
 			this.EntityId = entityId;
 			this.RecipientType = recipientType;
@@ -76,7 +76,7 @@
 				RecipientId = notificationModel.RecipientId,
 				RecipientType = notificationModel.RecipientType,
 				Id = notificationModel.Id,
-				CreatedOn = notificationModel.DateCreated,
+				CreatedOn = notificationModel.CreatedOn,
 				Summary = notificationModel.Summary,
 				Category = notificationModel.Category
 			};
@@ -121,7 +121,7 @@
 			}
 
 			notification.ArchivedOn = this.ArchivedOn;
-			notification.DateCreated = this.CreatedOn;
+			notification.CreatedOn = this.CreatedOn;
 			notification.Description = this.Description;
 			notification.EntityType = this.EntityType;
 			notification.EntityId = this.EntityId;

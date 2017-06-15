@@ -16,8 +16,8 @@
 			entity.Property(t => t.Id).HasColumnName("Id").UseSqlServerIdentityColumn();
 			entity.Property(t => t.Status).HasColumnName("Status");
 			entity.Property(t => t.ArchivedOn).HasColumnName("ArchivedOn");
-			entity.Property(t => t.DateCreated).HasColumnName("DateCreated");
-			entity.Property(t => t.Description).HasColumnName("Desc").HasMaxLength(MaxDescriptionLength);
+			entity.Property(t => t.CreatedOn).HasColumnName("CreatedOn");
+			entity.Property(t => t.Description).HasColumnName("Description").HasMaxLength(MaxDescriptionLength);
 			entity.Property(t => t.Summary).HasColumnName("Summary").HasMaxLength(MaxSummaryLength);
 			entity.Property(t => t.EntityId).HasColumnName("EntityId").HasMaxLength(20).IsUnicode(false);
 			entity.Property(t => t.EntityType).HasColumnName("EntityType").HasMaxLength(200).IsUnicode(false);
