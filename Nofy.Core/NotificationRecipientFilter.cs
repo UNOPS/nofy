@@ -12,11 +12,11 @@
 		/// <param name="recipientId">Recipient id could be any key for the receipient type like roleId, userId etc.. </param>
 		public NotificationRecipient(string recipientType, string recipientId)
 		{
-			RecipientType = recipientType;
-			RecipientId = recipientId;
+			this.RecipientType = recipientType;
+			this.RecipientId = recipientId;
 		}
 
-		public string RecipientType { get;  }
+		public string RecipientType { get; }
 		public string RecipientId { get; }
 	}
 }

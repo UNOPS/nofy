@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace Nofy.Core.Helper
+﻿namespace Nofy.Core.Helper
 {
+	using System.Collections.Generic;
+
 	public class PaginatedData<T>
 	{
 		public IEnumerable<T> Results { get; set; }

@@ -1,9 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Nofy.Core.Model;
-
-namespace Nofy.EntityFrameworkCore.Mappings
+﻿namespace Nofy.EntityFrameworkCore.Mappings
 {
+	using Microsoft.EntityFrameworkCore;
+	using Microsoft.EntityFrameworkCore.Metadata.Builders;
+	using Nofy.Core.Model;
+
 	internal class NotificationActionsMap : DbEntityConfiguration<NotificationActionModel>
 	{
 		public override void Configure(EntityTypeBuilder<NotificationActionModel> entity)

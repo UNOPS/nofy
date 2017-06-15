@@ -1,11 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.6
+VisualStudioVersion = 15.0.26430.13
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nofy.Core", "Nofy.Core\Nofy.Core.csproj", "{3497D98F-B56A-4FCF-B90D-8D0D1742981F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nofy.Core", "Nofy.Core\Nofy.Core.csproj", "{3497D98F-B56A-4FCF-B90D-8D0D1742981F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nofy.EntityFrameworkCore", "Nofy.EntityFrameworkCore\Nofy.EntityFrameworkCore.csproj", "{751D4667-6E49-41DA-A556-69B928B1D8E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nofy.EntityFrameworkCore", "Nofy.EntityFrameworkCore\Nofy.EntityFrameworkCore.csproj", "{751D4667-6E49-41DA-A556-69B928B1D8E2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2E523D1A-6C49-43D1-94A5-10289DA836CE}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		Nofy.sln.DotSettings = Nofy.sln.DotSettings
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,11 +1,11 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Nofy.EntityFrameworkCore.DataAccess;
-
-namespace Nofy.EntityFrameworkCore.Migrations
+﻿namespace Nofy.EntityFrameworkCore.Migrations
 {
+	using System;
+	using Microsoft.EntityFrameworkCore;
+	using Microsoft.EntityFrameworkCore.Infrastructure;
+	using Microsoft.EntityFrameworkCore.Metadata;
+	using Nofy.EntityFrameworkCore.DataAccess;
+
 	[DbContext(typeof(NotificationsDbContext))]
 	partial class NotificationsDbContextModelSnapshot : ModelSnapshot
 	{

@@ -1,9 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Nofy.Core.Model;
-using Nofy.EntityFrameworkCore.Mappings;
-
-namespace Nofy.EntityFrameworkCore.DataAccess
+﻿namespace Nofy.EntityFrameworkCore.DataAccess
 {
+	using Microsoft.EntityFrameworkCore;
+	using Nofy.Core.Model;
+	using Nofy.EntityFrameworkCore.Mappings;
+
 	public class NotificationsDbContext : DbContext
 	{
 		public NotificationsDbContext(DbContextOptions options) : base(options)

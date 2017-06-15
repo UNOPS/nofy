@@ -1,11 +1,22 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace Nofy.EntityFrameworkCore.Migrations
+﻿namespace Nofy.EntityFrameworkCore.Migrations
 {
+	using System;
+	using Microsoft.EntityFrameworkCore.Metadata;
+	using Microsoft.EntityFrameworkCore.Migrations;
+
 	public partial class init : Migration
 	{
+		protected override void Down(MigrationBuilder migrationBuilder)
+		{
+			migrationBuilder.DropTable(
+				name: "NotificationAction",
+				schema: "ntf");
+
+			migrationBuilder.DropTable(
+				name: "Notification",
+				schema: "ntf");
+		}
+
 		protected override void Up(MigrationBuilder migrationBuilder)
 		{
 			migrationBuilder.EnsureSchema(
@@ -60,17 +71,6 @@ namespace Nofy.EntityFrameworkCore.Migrations
 				schema: "ntf",
 				table: "NotificationAction",
 				column: "NotificationModelId");
-		}
-
-		protected override void Down(MigrationBuilder migrationBuilder)
-		{
-			migrationBuilder.DropTable(
-				name: "NotificationAction",
-				schema: "ntf");
-
-			migrationBuilder.DropTable(
-				name: "Notification",
-				schema: "ntf");
 		}
 	}
 }

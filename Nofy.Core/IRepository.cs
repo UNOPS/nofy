@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using Nofy.Core.Helper;
-
-namespace Nofy.Core
+﻿namespace Nofy.Core
 {
+	using System.Collections.Generic;
+	using Nofy.Core.Helper;
+
 	public interface IRepository
 	{
 		/// <summary>
@@ -20,13 +20,6 @@ namespace Nofy.Core
 		int Archive(int notificationId);
 
 		/// <summary>
-		/// Undo archive notification
-		/// </summary>
-		/// <param name="notificationId"></param>
-		/// <returns></returns>
-		int UnArchive(int notificationId);
-
-		/// <summary>
 		/// Get notification by Id
 		/// </summary>
 		/// <param name="notificationId"></param>
@@ -41,7 +34,17 @@ namespace Nofy.Core
 		/// <param name="pageSize"></param>
 		/// <param name="showArchived"></param>
 		/// <returns></returns>
-		PaginatedData<Notification> GetNotifications(IEnumerable<NotificationRecipient> recipients,
-			int pageIndex, int pageSize, bool showArchived);
+		PaginatedData<Notification> GetNotifications(
+			IEnumerable<NotificationRecipient> recipients,
+			int pageIndex,
+			int pageSize,
+			bool showArchived);
+
+		/// <summary>
+		/// Undo archive notification
+		/// </summary>
+		/// <param name="notificationId"></param>
+		/// <returns></returns>
+		int UnArchive(int notificationId);
 	}
 }

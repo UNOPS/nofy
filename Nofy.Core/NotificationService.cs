@@ -1,42 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using Nofy.Core.Helper;
-
-namespace Nofy.Core
+﻿namespace Nofy.Core
 {
+	using System;
+	using System.Collections.Generic;
+	using Nofy.Core.Helper;
+
 	/// <summary>
 	/// Manage notifications for a repository 
 	/// </summary>
 	public class NotificationService : IDisposable
 	{
-		private readonly object _lockKey = new object();
+		private readonly object lockKey = new object();
 
 		//Temporary list of notification 
-		private readonly List<Notification> _notifications = new List<Notification>();
+		private readonly List<Notification> notifications = new List<Notification>();
 
 		//Notification repository
-		private readonly IRepository _repository;
+		private readonly IRepository repository;
 
 		/// <summary>
 		/// Initialize new instance of notification service
 		/// </summary>
 		/// <param name="repository">Service's repository</param>
-		public NotificationService( IRepository repository)
+		public NotificationService(IRepository repository)
 		{
-			_repository = repository;
-			Config = new Configurations
+			this.repository = repository;
+			this.Config = new NotificationServiceConfiguration
 			{
 				BatchLimit = 0
 			};
 		}
 
 		//Service configurations
-		public Configurations Config { get; set; }
+		public NotificationServiceConfiguration Config { get; set; }
 
 		//Make sure to dispose all resources
 		public void Dispose()
 		{
-			Dispose(true);
+			this.Dispose(true);
 			GC.SuppressFinalize(this);
 		}
 
@@ -46,16 +46,7 @@ namespace Nofy.Core
 		/// <param name="id">Notification id</param>
 		public void Archive(int id)
 		{
-			_repository.Archive(id);
-		}
-
-		/// <summary>
-		/// Unarchive notification by id
-		/// </summary>
-		/// <param name="id">Notification id</param>
-		public void UnArchive(int id)
-		{
-			_repository.UnArchive(id);
+			this.repository.Archive(id);
 		}
 
 		/// <summary>
@@ -65,9 +56,8 @@ namespace Nofy.Core
 		/// <returns></returns>
 		public Notification GetNotification(int notificationId)
 		{
-			return _repository.GetNotification(notificationId);
+			return this.repository.GetNotification(notificationId);
 		}
-
 
 		/// <summary>
 		/// Get paginated list of notifications for list of recipients 
@@ -77,21 +67,35 @@ namespace Nofy.Core
 		/// <param name="pageSize">Page size : maximum number of notification to be returned </param>
 		/// <param name="showArchived">Include archived notification in result</param>
 		/// <returns></returns>
-		public PaginatedData<Notification> GetNotifications(IEnumerable<NotificationRecipient> recipients,
-			int pageIndex, int pageSize, bool showArchived)
+		public PaginatedData<Notification> GetNotifications(
+			IEnumerable<NotificationRecipient> recipients,
+			int pageIndex,
+			int pageSize,
+			bool showArchived)
 		{
-			return _repository.GetNotifications(recipients, pageIndex, pageSize, showArchived);
+			return this.repository.GetNotifications(recipients, pageIndex, pageSize, showArchived);
 		}
 
 		public void Publish(Notification n)
 		{
-			lock (_lockKey)
+			lock (this.lockKey)
 			{
-				_notifications.Add(n);
+				this.notifications.Add(n);
 			}
 
-			if (_notifications.Count > Config.BatchLimit)
-				SaveBatch();
+			if (this.notifications.Count > this.Config.BatchLimit)
+			{
+				this.SaveBatch();
+			}
+		}
+
+		/// <summary>
+		/// Unarchive notification by id
+		/// </summary>
+		/// <param name="id">Notification id</param>
+		public void UnArchive(int id)
+		{
+			this.repository.UnArchive(id);
 		}
 
 		/// <summary>
@@ -101,7 +105,9 @@ namespace Nofy.Core
 		protected virtual void Dispose(bool disposing)
 		{
 			if (disposing)
-				SaveBatch();
+			{
+				this.SaveBatch();
+			}
 		}
 
 		/// <summary>
@@ -109,13 +115,15 @@ namespace Nofy.Core
 		/// </summary>
 		private void SaveBatch()
 		{
-			lock (_lockKey)
+			lock (this.lockKey)
 			{
-				if (_notifications.Count == 0)
+				if (this.notifications.Count == 0)
+				{
 					return;
+				}
 
-				_repository.AddRange(_notifications);
-				_notifications.Clear();
+				this.repository.AddRange(this.notifications);
+				this.notifications.Clear();
 			}
 		}
 	}

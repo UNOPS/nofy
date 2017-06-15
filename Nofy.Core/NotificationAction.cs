@@ -1,20 +1,20 @@
-﻿using Newtonsoft.Json;
-using Nofy.Core.Model;
-
-namespace Nofy.Core
+﻿namespace Nofy.Core
 {
+	using Newtonsoft.Json;
+	using Nofy.Core.Model;
+
 	public class NotificationAction
 	{
 		public NotificationAction(string label, string link)
 		{
-			Link = link;
-			Label = label;
+			this.Link = link;
+			this.Label = label;
 		}
 
 		public NotificationAction(string label, object link)
 		{
-			Label = label;
-			Link = JsonConvert.SerializeObject(link);
+			this.Label = label;
+			this.Link = JsonConvert.SerializeObject(link);
 		}
 
 		private NotificationAction()

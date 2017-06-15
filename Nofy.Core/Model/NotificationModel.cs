@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Nofy.Core.Model
+﻿namespace Nofy.Core.Model
 {
+	using System;
+	using System.Collections.Generic;
+
 	public class NotificationModel
 	{
 		public virtual ICollection<NotificationActionModel> Actions { get; set; }
 		public DateTime? ArchivedOn { get; set; }
+		public int? Category { get; set; }
 		public DateTime DateCreated { get; set; }
 		public string Description { get; set; }
 		public string EntityId { get; set; }
@@ -17,6 +18,5 @@ namespace Nofy.Core.Model
 		public string RecipientType { get; set; }
 		public NotificationStatus Status { get; set; }
 		public string Summary { get; set; }
-		public int? Category { get; set; }
 	}
 }

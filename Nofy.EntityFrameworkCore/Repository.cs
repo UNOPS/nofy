@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
-using Microsoft.Extensions.DependencyInjection;
-using Nofy.Core;
-using Nofy.Core.Helper;
-using Nofy.Core.Model;
-using Nofy.EntityFrameworkCore.DataAccess;
-
-namespace Nofy.EntityFrameworkCore
+﻿namespace Nofy.EntityFrameworkCore
 {
+	using System;
+	using System.Collections.Generic;
+	using System.Linq;
+	using Microsoft.EntityFrameworkCore;
+	using Microsoft.EntityFrameworkCore.Infrastructure;
+	using Microsoft.EntityFrameworkCore.Migrations;
+	using Microsoft.Extensions.DependencyInjection;
+	using Nofy.Core;
+	using Nofy.Core.Helper;
+	using Nofy.Core.Model;
+	using Nofy.EntityFrameworkCore.DataAccess;
+
 	/// <summary>
 	/// Represent notification repository to manipulate notification data.
 	/// </summary>
@@ -27,7 +27,7 @@ namespace Nofy.EntityFrameworkCore
 		{
 			var optionsBuilder = new DbContextOptionsBuilder<NotificationsDbContext>();
 			optionsBuilder.UseSqlServer(connectionString);
-			DbContext = new NotificationsDbContext(optionsBuilder.Options);
+			this.DbContext = new NotificationsDbContext(optionsBuilder.Options);
 		}
 
 		/// <summary>
@@ -37,7 +37,7 @@ namespace Nofy.EntityFrameworkCore
 		/// <returns></returns>
 		public int AddRange(List<Notification> notifications)
 		{
-			DbContext.Notifications.AddRange(notifications.Select(n => new NotificationModel
+			this.DbContext.Notifications.AddRange(notifications.Select(n => new NotificationModel
 			{
 				Status = n.Status,
 				DateCreated = n.CreatedOn,
@@ -54,7 +54,7 @@ namespace Nofy.EntityFrameworkCore
 					ActionLink = a.Link
 				}).ToList()
 			}));
-			return DbContext.SaveChanges();
+			return this.DbContext.SaveChanges();
 		}
 
 		/// <summary>
@@ -64,19 +64,22 @@ namespace Nofy.EntityFrameworkCore
 		/// <returns></returns>
 		public int Archive(int notificationId)
 		{
-			var notification = DbContext.Notifications.Find(notificationId);
+			var notification = this.DbContext.Notifications.Find(notificationId);
 
 			if (notification == null)
+			{
 				throw new ArgumentNullException(nameof(notification));
+			}
+
 			var ntf = Notification.Load(notification);
 			if (ntf.Archive())
 			{
-				notification.Status = NotificationStatus.Archive;
-				return DbContext.SaveChanges();
+				notification.Status = NotificationStatus.Archived;
+				return this.DbContext.SaveChanges();
 			}
+
 			return -1;
 		}
-
 
 		/// <summary>
 		/// Get notification by Id
@@ -85,10 +88,9 @@ namespace Nofy.EntityFrameworkCore
 		/// <returns></returns>
 		public Notification GetNotification(int notificationId)
 		{
-			var notification = DbContext.Notifications.Find(notificationId);
+			var notification = this.DbContext.Notifications.Find(notificationId);
 			return notification == null ? null : Notification.Load(notification);
 		}
-
 
 		/// <summary>
 		/// Get all notifications for recipients
@@ -98,18 +100,25 @@ namespace Nofy.EntityFrameworkCore
 		/// <param name="pageSize"></param>
 		/// <param name="showArchived"></param>
 		/// <returns></returns>
-		public PaginatedData<Notification> GetNotifications(IEnumerable<NotificationRecipient> recipients,
-			int pageIndex, int pageSize, bool showArchived)
+		public PaginatedData<Notification> GetNotifications(
+			IEnumerable<NotificationRecipient> recipients,
+			int pageIndex,
+			int pageSize,
+			bool showArchived)
 		{
-			var query = DbContext.Notifications.AsQueryable();
+			var query = this.DbContext.Notifications.AsQueryable();
 
 			if (!showArchived)
-				query = query.Where(t => t.Status != NotificationStatus.Archive);
+			{
+				query = query.Where(t => t.Status != NotificationStatus.Archived);
+			}
 
 			query = query.Where(t => recipients.Contains(new NotificationRecipient(t.RecipientType, t.RecipientId)));
 
 			foreach (var recipient in recipients)
+			{
 				query = query.Where(t => t.RecipientType == recipient.RecipientType && t.RecipientId == recipient.RecipientId);
+			}
 
 			var data = query
 				.Include(t => t.Actions)
@@ -123,7 +132,6 @@ namespace Nofy.EntityFrameworkCore
 			};
 		}
 
-
 		/// <summary>
 		/// Undo archive notification
 		/// </summary>
@@ -131,27 +139,29 @@ namespace Nofy.EntityFrameworkCore
 		/// <returns></returns>
 		public int UnArchive(int notificationId)
 		{
-			var notification = DbContext.Notifications.Find(notificationId);
+			var notification = this.DbContext.Notifications.Find(notificationId);
 
 			if (notification == null)
+			{
 				throw new ArgumentNullException(nameof(notification));
+			}
+
 			var ntf = Notification.Load(notification);
 			if (ntf.UnArchive())
 			{
 				notification.Status = NotificationStatus.Read;
-				return DbContext.SaveChanges();
+				return this.DbContext.SaveChanges();
 			}
+
 			return -1;
 		}
-
 
 		/// <summary>
 		/// Run initialization migration.
 		/// </summary>
 		public void InitializeMigration()
 		{
-			var migrator = DbContext.GetInfrastructure().GetRequiredService<IMigrator>();
-			migrator.Migrate("init");
+			this.DbContext.Database.Migrate();
 		}
 	}
 }
