@@ -4,9 +4,9 @@
 	using Microsoft.EntityFrameworkCore.Metadata.Builders;
 	using Nofy.Core.Model;
 
-	internal class NotificationActionsMap : DbEntityConfiguration<NotificationActionModel>
+	internal class NotificationActionsMap : DbEntityConfiguration<NotificationAction>
 	{
-		public override void Configure(EntityTypeBuilder<NotificationActionModel> entity)
+		public override void Configure(EntityTypeBuilder<NotificationAction> entity)
 		{
 			entity.ToTable("NotificationAction");
 			entity.HasKey(t => t.Id);

@@ -2,6 +2,7 @@
 {
 	using System.Collections.Generic;
 	using Nofy.Core.Helper;
+	using Nofy.Core.Model;
 
 	public interface INotificationRepository
 	{

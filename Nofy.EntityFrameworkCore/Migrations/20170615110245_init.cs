@@ -31,8 +31,8 @@
 						.Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
 					ArchivedOn = table.Column<DateTime>(nullable: true),
 					Category = table.Column<int>(nullable: true),
-					DateCreated = table.Column<DateTime>(nullable: false),
-					Desc = table.Column<string>(maxLength: 1000, nullable: true),
+					CreatedOn = table.Column<DateTime>(nullable: false),
+					Description = table.Column<string>(maxLength: 1000, nullable: true),
 					EntityId = table.Column<string>(unicode: false, maxLength: 20, nullable: true),
 					EntityType = table.Column<string>(unicode: false, maxLength: 200, nullable: true),
 					RecipientId = table.Column<string>(unicode: false, maxLength: 50, nullable: true),
@@ -51,26 +51,25 @@
 						.Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
 					ActionLink = table.Column<string>(unicode: false, maxLength: 1000, nullable: true),
 					Label = table.Column<string>(maxLength: 50, nullable: true),
-					NotificationId = table.Column<int>(nullable: false),
-					NotificationModelId = table.Column<int>(nullable: true)
+					NotificationId = table.Column<int>(nullable: false)
 				},
 				constraints: table =>
 				{
 					table.PrimaryKey("PK_NotificationAction", x => x.Id);
 					table.ForeignKey(
-						name: "FK_NotificationAction_Notification_NotificationModelId",
-						column: x => x.NotificationModelId,
+						name: "FK_NotificationAction_Notification_NotificationId",
+						column: x => x.NotificationId,
 						principalSchema: "ntf",
 						principalTable: "Notification",
 						principalColumn: "Id",
-						onDelete: ReferentialAction.Restrict);
+						onDelete: ReferentialAction.Cascade);
 				});
 
 			migrationBuilder.CreateIndex(
-				name: "IX_NotificationAction_NotificationModelId",
+				name: "IX_NotificationAction_NotificationId",
 				schema: "ntf",
 				table: "NotificationAction",
-				column: "NotificationModelId");
+				column: "NotificationId");
 		}
 	}
 }

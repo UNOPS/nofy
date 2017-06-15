@@ -4,11 +4,12 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Nofy.EntityFrameworkCore.DataAccess;
+using Nofy.Core;
 
 namespace Nofy.EntityFrameworkCore.Migrations
 {
     [DbContext(typeof(NotificationsDbContext))]
-    [Migration("20170607084523_init")]
+    [Migration("20170615110245_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -18,36 +19,7 @@ namespace Nofy.EntityFrameworkCore.Migrations
                 .HasAnnotation("ProductVersion", "1.1.2")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Nofy.Core.Model.NotificationActionModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("Id")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ActionLink")
-                        .HasColumnName("ActionLink")
-                        .HasMaxLength(1000)
-                        .IsUnicode(false);
-
-                    b.Property<string>("Label")
-                        .HasColumnName("Label")
-                        .HasMaxLength(50)
-                        .IsUnicode(true);
-
-                    b.Property<int>("NotificationId")
-                        .HasColumnName("NotificationId");
-
-                    b.Property<int?>("NotificationModelId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NotificationModelId");
-
-                    b.ToTable("NotificationAction");
-                });
-
-            modelBuilder.Entity("Nofy.Core.Model.NotificationModel", b =>
+            modelBuilder.Entity("Nofy.Core.Model.Notification", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -60,11 +32,11 @@ namespace Nofy.EntityFrameworkCore.Migrations
                     b.Property<int?>("Category")
                         .HasColumnName("Category");
 
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnName("DateCreated");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnName("CreatedOn");
 
                     b.Property<string>("Description")
-                        .HasColumnName("Desc")
+                        .HasColumnName("Description")
                         .HasMaxLength(1000);
 
                     b.Property<string>("EntityId")
@@ -99,11 +71,39 @@ namespace Nofy.EntityFrameworkCore.Migrations
                     b.ToTable("Notification");
                 });
 
-            modelBuilder.Entity("Nofy.Core.Model.NotificationActionModel", b =>
+            modelBuilder.Entity("Nofy.Core.Model.NotificationAction", b =>
                 {
-                    b.HasOne("Nofy.Core.Model.NotificationModel")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Id")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ActionLink")
+                        .HasColumnName("ActionLink")
+                        .HasMaxLength(1000)
+                        .IsUnicode(false);
+
+                    b.Property<string>("Label")
+                        .HasColumnName("Label")
+                        .HasMaxLength(50)
+                        .IsUnicode(true);
+
+                    b.Property<int>("NotificationId")
+                        .HasColumnName("NotificationId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NotificationId");
+
+                    b.ToTable("NotificationAction");
+                });
+
+            modelBuilder.Entity("Nofy.Core.Model.NotificationAction", b =>
+                {
+                    b.HasOne("Nofy.Core.Model.Notification")
                         .WithMany("Actions")
-                        .HasForeignKey("NotificationModelId");
+                        .HasForeignKey("NotificationId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
         }
     }

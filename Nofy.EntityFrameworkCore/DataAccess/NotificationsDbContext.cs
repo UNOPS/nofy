@@ -10,7 +10,7 @@
 		{
 		}
 
-		public virtual DbSet<NotificationModel> Notifications { get; set; }
+		public virtual DbSet<Notification> Notifications { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder builder)
 		{

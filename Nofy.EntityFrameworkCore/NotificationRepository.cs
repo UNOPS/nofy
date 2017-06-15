@@ -34,7 +34,7 @@
 		/// <returns></returns>
 		public int AddRange(List<Notification> notifications)
 		{
-			this.DbContext.Notifications.AddRange(notifications.Select(n => new NotificationModel
+			this.DbContext.Notifications.AddRange(notifications.Select(n => new Notification
 			{
 				Status = n.Status,
 				CreatedOn = n.CreatedOn,
@@ -45,10 +45,10 @@
 				RecipientType = n.RecipientType,
 				Summary = n.Summary,
 				Category = n.Category,
-				Actions = n.Actions.Select(a => new NotificationActionModel
+				Actions = n.Actions.Select(a => new NotificationAction
 				{
 					Label = a.Label,
-					ActionLink = a.Link
+					ActionLink = a.ActionLink
 				}).ToList()
 			}));
 			return this.DbContext.SaveChanges();
@@ -68,8 +68,7 @@
 				throw new ArgumentNullException(nameof(notification));
 			}
 
-			var ntf = Notification.Load(notification);
-			if (ntf.Archive())
+			if (notification.Archive())
 			{
 				notification.Status = NotificationStatus.Archived;
 				return this.DbContext.SaveChanges();
@@ -85,8 +84,7 @@
 		/// <returns></returns>
 		public Notification GetNotification(int notificationId)
 		{
-			var notification = this.DbContext.Notifications.Find(notificationId);
-			return notification == null ? null : Notification.Load(notification);
+			return this.DbContext.Notifications.Find(notificationId);
 		}
 
 		/// <summary>
@@ -124,7 +122,7 @@
 
 			return new PaginatedData<Notification>
 			{
-				Results = data.Results.Select(Notification.Load),
+				Results = data.Results,
 				TotalCount = data.TotalCount
 			};
 		}
@@ -143,8 +141,7 @@
 				throw new ArgumentNullException(nameof(notification));
 			}
 
-			var ntf = Notification.Load(notification);
-			if (ntf.UnArchive())
+			if (notification.UnArchive())
 			{
 				notification.Status = NotificationStatus.Read;
 				return this.DbContext.SaveChanges();

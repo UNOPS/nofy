@@ -3,6 +3,7 @@
 	using System;
 	using System.Collections.Generic;
 	using Nofy.Core.Helper;
+	using Nofy.Core.Model;
 
 	/// <summary>
 	/// Manage notifications for a repository 
@@ -70,8 +71,8 @@
 		public PaginatedData<Notification> GetNotifications(
 			IEnumerable<NotificationRecipient> recipients,
 			int pageIndex,
-			int pageSize,
-			bool showArchived)
+			int pageSize = 10,
+			bool showArchived = false)
 		{
 			return this.notificationRepository.GetNotifications(recipients, pageIndex, pageSize, showArchived);
 		}

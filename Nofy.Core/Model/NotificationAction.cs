@@ -1,6 +1,6 @@
 ﻿namespace Nofy.Core.Model
 {
-	public class NotificationActionModel
+	public class NotificationAction
 	{
 		public string ActionLink { get; set; }
 		public int Id { get; set; }
