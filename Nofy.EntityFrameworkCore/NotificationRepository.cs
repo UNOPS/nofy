@@ -110,11 +110,6 @@
 
 			query = query.Where(t => recipients.Contains(new NotificationRecipient(t.RecipientType, t.RecipientId)));
 
-			foreach (var recipient in recipients)
-			{
-				query = query.Where(t => t.RecipientType == recipient.RecipientType && t.RecipientId == recipient.RecipientId);
-			}
-
 			var data = query
 				.Include(t => t.Actions)
 				.OrderByDescending(n => n.Id)
