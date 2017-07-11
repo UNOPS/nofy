@@ -6,6 +6,11 @@
 
 	public class NotificationsDbContext : DbContext
 	{
+		//public NotificationsDbContext()
+		//	: base(new DbContextOptionsBuilder().UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=nofy;Trusted_Connection=True;MultipleActiveResultSets=true").Options)
+		//{
+		//}
+
 		public NotificationsDbContext(DbContextOptions options) : base(options)
 		{
 		}
