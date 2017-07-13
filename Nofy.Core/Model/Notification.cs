@@ -85,24 +85,19 @@
 		public DateTime CreatedOn { get; set; }
 		public string Description { get; set; }
 
-		[StringLength(50, ErrorMessage = "EntityType exceeded the maximum length of 50")]
 		public string EntityId { get; set; }
 
-		[StringLength(200, ErrorMessage = "EntityType exceeded the maximum length of 50")]
 		public string EntityType { get; set; }
 
 		public int Id { get; set; }
 
 
-		[StringLength(50, ErrorMessage = "EntityType exceeded the maximum length of 50")]
 		public string RecipientId { get; set; }
 
-		[StringLength(1, ErrorMessage = "EntityType exceeded the maximum length of 50")]
 		public string RecipientType { get; set; }
 
 
 		public NotificationStatus Status { get; set; }
-		[StringLength(100, ErrorMessage = "EntityType exceeded the maximum length of 100")]
 		public string Summary { get; set; }
 
 		public void AddAction(NotificationAction action)
