@@ -34,23 +34,7 @@
 		/// <returns></returns>
 		public int AddRange(List<Notification> notifications)
 		{
-			this.DbContext.Notifications.AddRange(notifications.Select(n => new Notification
-			{
-				Status = n.Status,
-				CreatedOn = n.CreatedOn,
-				Description = n.Description,
-				EntityId = n.EntityId,
-				EntityType = n.EntityType,
-				RecipientId = n.RecipientId,
-				RecipientType = n.RecipientType,
-				Summary = n.Summary,
-				Category = n.Category,
-				Actions = n.Actions.Select(a => new NotificationAction
-				{
-					Label = a.Label,
-					ActionLink = a.ActionLink
-				}).ToList()
-			}));
+			this.DbContext.Notifications.AddRange(notifications.Select(n => new Notification(n.Description,n.EntityType,n.EntityId,n.RecipientType,n.RecipientId,n.Summary,n.Category,n.Actions as NotificationAction[])));
 			return this.DbContext.SaveChanges();
 		}
 

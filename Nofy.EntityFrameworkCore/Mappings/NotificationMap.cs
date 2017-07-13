@@ -6,8 +6,7 @@
 
 	internal class NotificationMap : DbEntityConfiguration<Notification>
 	{
-		public const int MaxDescriptionLength = 1000;
-		public const int MaxSummaryLength = 100;
+		
 
 		public override void Configure(EntityTypeBuilder<Notification> entity)
 		{
@@ -17,12 +16,12 @@
 			entity.Property(t => t.Status).HasColumnName("Status");
 			entity.Property(t => t.ArchivedOn).HasColumnName("ArchivedOn");
 			entity.Property(t => t.CreatedOn).HasColumnName("CreatedOn");
-			entity.Property(t => t.Description).HasColumnName("Description").HasMaxLength(MaxDescriptionLength);
-			entity.Property(t => t.Summary).HasColumnName("Summary").HasMaxLength(MaxSummaryLength);
-			entity.Property(t => t.EntityId).HasColumnName("EntityId").HasMaxLength(20).IsUnicode(false);
-			entity.Property(t => t.EntityType).HasColumnName("EntityType").HasMaxLength(200).IsUnicode(false);
-			entity.Property(t => t.RecipientId).HasColumnName("RecipientId").HasMaxLength(50).IsUnicode(false);
-			entity.Property(t => t.RecipientType).HasColumnName("RecipientType").HasMaxLength(20).IsUnicode(false);
+			entity.Property(t => t.Description).HasColumnName("Description").HasMaxLength(NotificationValidation.MaxDescriptionLength);
+			entity.Property(t => t.Summary).HasColumnName("Summary").HasMaxLength(NotificationValidation.MaxSummaryLength);
+			entity.Property(t => t.EntityId).HasColumnName("EntityId").HasMaxLength(NotificationValidation.MaxEntityIdLength).IsUnicode(false);
+			entity.Property(t => t.EntityType).HasColumnName("EntityType").HasMaxLength(NotificationValidation.MaxEntityTypeLength).IsUnicode(false);
+			entity.Property(t => t.RecipientId).HasColumnName("RecipientId").HasMaxLength(NotificationValidation.MaxRecipientIdLength).IsUnicode(false);
+			entity.Property(t => t.RecipientType).HasColumnName("RecipientType").HasMaxLength(NotificationValidation.MaxRecipientTypeLength).IsUnicode(false);
 			entity.Property(t => t.Category).HasColumnName("Category");
 		}
 	}
