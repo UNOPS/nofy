@@ -6,8 +6,6 @@
 
 	internal class NotificationMap : DbEntityConfiguration<Notification>
 	{
-		
-
 		public override void Configure(EntityTypeBuilder<Notification> entity)
 		{
 			entity.ToTable("Notification");

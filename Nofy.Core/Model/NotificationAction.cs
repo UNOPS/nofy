@@ -6,13 +6,7 @@
 
 	public class NotificationAction
 	{
-		public string ActionLink { get; set; }
-		public int Id { get; set; }
-		public string Label { get; set; }
-		public int NotificationId { get; set; }
-
-
-		public  NotificationAction(string actionLink, string label,int notificationId)
+		public NotificationAction(string actionLink, string label, int notificationId)
 		{
 			this.ActionLink = actionLink;
 			this.Label = label;
@@ -25,9 +19,17 @@
 			}
 		}
 
+		public NotificationAction()
+		{
+		}
+
+		public string ActionLink { get; set; }
+		public int Id { get; set; }
+		public string Label { get; set; }
+		public int NotificationId { get; set; }
+
 		public static IEnumerable<ValidationResult> ValidateNotificationAction(NotificationAction na, ValidationContext context)
 		{
-
 			if (na == null)
 			{
 				yield return new ValidationResult(string.Format("{0} is required.", context.DisplayName));
@@ -36,19 +38,16 @@
 			{
 				if (na.Label.Length > NotificationActionValidation.MaxLabelLength)
 				{
-					yield return new ValidationResult(string.Format("{0} Label exceeded the maximum length of {1}.", context.DisplayName, NotificationActionValidation.MaxLabelLength));
+					yield return new ValidationResult(string.Format("{0} Label exceeded the maximum length of {1}.", context.DisplayName,
+						NotificationActionValidation.MaxLabelLength));
 				}
 
 				if (na.ActionLink.Length > NotificationActionValidation.MaxLinkLength)
 				{
-					yield return new ValidationResult(string.Format("{0} Label exceeded the maximum length of {1}.", context.DisplayName, NotificationActionValidation.MaxLinkLength));
+					yield return new ValidationResult(string.Format("{0} Label exceeded the maximum length of {1}.", context.DisplayName,
+						NotificationActionValidation.MaxLinkLength));
 				}
 			}
-		}
-
-		public NotificationAction()
-		{
-			
 		}
 	}
 }

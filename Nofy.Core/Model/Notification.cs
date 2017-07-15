@@ -34,47 +34,6 @@
 			}
 		}
 
-		public static IEnumerable<ValidationResult> ValidateNotification(Notification notification, ValidationContext context)
-		{
-
-			if (notification == null)
-			{
-				yield return new ValidationResult(string.Format("{0} is required.", context.DisplayName));
-			}
-			else
-			{
-
-				if (notification.Summary.Length > NotificationValidation.MaxSummaryLength)
-				{
-					yield return new ValidationResult(string.Format("{0} Summary exceeded the maximum length of {1}.", context.DisplayName, NotificationValidation.MaxSummaryLength));
-				}
-
-				if (notification.EntityType.Length > NotificationValidation.MaxEntityTypeLength)
-				{
-					yield return new ValidationResult(string.Format("{0} EntityType exceeded the maximum length of {1}.", context.DisplayName, NotificationValidation.MaxEntityTypeLength));
-				}
-
-				if (notification.EntityId.Length > NotificationValidation.MaxEntityIdLength)
-				{
-					yield return new ValidationResult(string.Format("{0} EntityId exceeded the maximum length of {1}.", context.DisplayName, NotificationValidation.MaxEntityIdLength));
-				}
-
-				if (notification.RecipientType.Length > NotificationValidation.MaxRecipientTypeLength)
-				{
-					yield return new ValidationResult(string.Format("{0} RecipientType exceeded the maximum length of {1}.", context.DisplayName, NotificationValidation.MaxRecipientTypeLength));
-				}
-
-				if (notification.RecipientId.Length > NotificationValidation.MaxRecipientIdLength)
-				{
-					yield return new ValidationResult(string.Format("{0} RecipientId exceeded the maximum length of {1}.", context.DisplayName, NotificationValidation.MaxRecipientIdLength));
-				}
-
-			}
-
-		}
-
-
-
 		public Notification()
 		{
 		}
@@ -91,14 +50,52 @@
 
 		public int Id { get; set; }
 
-
 		public string RecipientId { get; set; }
 
 		public string RecipientType { get; set; }
 
-
 		public NotificationStatus Status { get; set; }
 		public string Summary { get; set; }
+
+		public static IEnumerable<ValidationResult> ValidateNotification(Notification notification, ValidationContext context)
+		{
+			if (notification == null)
+			{
+				yield return new ValidationResult(string.Format("{0} is required.", context.DisplayName));
+			}
+			else
+			{
+				if (notification.Summary.Length > NotificationValidation.MaxSummaryLength)
+				{
+					yield return new ValidationResult(string.Format("{0} Summary exceeded the maximum length of {1}.", context.DisplayName,
+						NotificationValidation.MaxSummaryLength));
+				}
+
+				if (notification.EntityType.Length > NotificationValidation.MaxEntityTypeLength)
+				{
+					yield return new ValidationResult(string.Format("{0} EntityType exceeded the maximum length of {1}.", context.DisplayName,
+						NotificationValidation.MaxEntityTypeLength));
+				}
+
+				if (notification.EntityId.Length > NotificationValidation.MaxEntityIdLength)
+				{
+					yield return new ValidationResult(string.Format("{0} EntityId exceeded the maximum length of {1}.", context.DisplayName,
+						NotificationValidation.MaxEntityIdLength));
+				}
+
+				if (notification.RecipientType.Length > NotificationValidation.MaxRecipientTypeLength)
+				{
+					yield return new ValidationResult(string.Format("{0} RecipientType exceeded the maximum length of {1}.", context.DisplayName,
+						NotificationValidation.MaxRecipientTypeLength));
+				}
+
+				if (notification.RecipientId.Length > NotificationValidation.MaxRecipientIdLength)
+				{
+					yield return new ValidationResult(string.Format("{0} RecipientId exceeded the maximum length of {1}.", context.DisplayName,
+						NotificationValidation.MaxRecipientIdLength));
+				}
+			}
+		}
 
 		public void AddAction(NotificationAction action)
 		{

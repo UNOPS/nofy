@@ -564,13 +564,14 @@
 	<s:Boolean x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=285CE7C68701C849AB909C92D99156FA/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=285CE7C68701C849AB909C92D99156FA/AbsolutePath/@EntryValue">C:\Users\nikitap\Projects\nofy\Nofy.sln.DotSettings</s:String>
 	<s:String x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=285CE7C68701C849AB909C92D99156FA/RelativePath/@EntryValue"></s:String>
-	<s:Boolean x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=9EA7A2CB8C34C94EA111FF9D3A42F5A4/@KeyIndexDefined">True</s:Boolean>
-	<s:String x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=9EA7A2CB8C34C94EA111FF9D3A42F5A4/AbsolutePath/@EntryValue">C:\UiMetadataFramework\UiMetadataFramework.sln.DotSettings</s:String>
-	<s:String x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=9EA7A2CB8C34C94EA111FF9D3A42F5A4/RelativePath/@EntryValue"></s:String>
+	
+	
+	
 	<s:Boolean x:Key="/Default/Environment/InjectedLayers/InjectedLayerCustomization/=File285CE7C68701C849AB909C92D99156FA/@KeyIndexDefined">True</s:Boolean>
 	<s:Double x:Key="/Default/Environment/InjectedLayers/InjectedLayerCustomization/=File285CE7C68701C849AB909C92D99156FA/RelativePriority/@EntryValue">1</s:Double>
-	<s:Boolean x:Key="/Default/Environment/InjectedLayers/InjectedLayerCustomization/=File9EA7A2CB8C34C94EA111FF9D3A42F5A4/@KeyIndexDefined">True</s:Boolean>
-	<s:Double x:Key="/Default/Environment/InjectedLayers/InjectedLayerCustomization/=File9EA7A2CB8C34C94EA111FF9D3A42F5A4/RelativePriority/@EntryValue">2</s:Double>
+	
+	
+	
 	<s:Boolean x:Key="/Default/Environment/InjectedLayers/InjectedLayerCustomization/=xunitcontrib_002Dtemplates/@KeyIndexDefined">True</s:Boolean>
 	<s:Double x:Key="/Default/Environment/InjectedLayers/InjectedLayerCustomization/=xunitcontrib_002Dtemplates/RelativePriority/@EntryValue">1</s:Double>
 	<s:Boolean x:Key="/Default/Environment/SearchAndNavigation/GotoSingleUsageImmediately/@EntryValue">False</s:Boolean>

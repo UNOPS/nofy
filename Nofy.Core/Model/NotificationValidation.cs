@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Nofy.Core.Model
+﻿namespace Nofy.Core.Model
 {
-    public class NotificationValidation
+	public class NotificationValidation
     {
 	    public const int MaxDescriptionLength = 1000;
 	    public const int MaxSummaryLength = 100;
