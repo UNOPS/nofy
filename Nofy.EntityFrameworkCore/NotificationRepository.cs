@@ -35,7 +35,7 @@
 		public int AddRange(List<Notification> notifications)
 		{
 			this.DbContext.Notifications.AddRange(notifications.Select(n => new Notification(n.Description, n.EntityType, n.EntityId, n.RecipientType,
-				n.RecipientId, n.Summary, n.Category, n.Actions as NotificationAction[])));
+				n.RecipientId, n.Summary, n.Category, n.Actions.Select(a => a).ToArray())));
 			return this.DbContext.SaveChanges();
 		}
 
