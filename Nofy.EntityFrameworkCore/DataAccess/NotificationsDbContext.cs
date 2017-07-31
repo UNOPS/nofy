@@ -1,30 +1,30 @@
 ﻿namespace Nofy.EntityFrameworkCore.DataAccess
 {
-	using Microsoft.EntityFrameworkCore;
-	using Nofy.Core.Model;
-	using Nofy.EntityFrameworkCore.Mappings;
+    using Microsoft.EntityFrameworkCore;
+    using Nofy.Core.Model;
+    using Nofy.EntityFrameworkCore.Mappings;
 
-	public class NotificationsDbContext : DbContext
-	{
-		//public NotificationsDbContext()
-		//	: base(new DbContextOptionsBuilder().UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=nofy;Trusted_Connection=True;MultipleActiveResultSets=true").Options)
-		//{
-		//}
+    public class NotificationsDbContext : DbContext
+    {
+        //public NotificationsDbContext()
+        //	: base(new DbContextOptionsBuilder().UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=nofy;Trusted_Connection=True;MultipleActiveResultSets=true").Options)
+        //{
+        //}
 
-		public NotificationsDbContext(DbContextOptions options) : base(options)
-		{
-		}
+        public NotificationsDbContext(DbContextOptions options) : base(options)
+        {
+        }
 
-		public virtual DbSet<Notification> Notifications { get; set; }
+        public virtual DbSet<Notification> Notifications { get; set; }
 
-		protected override void OnModelCreating(ModelBuilder builder)
-		{
-			base.OnModelCreating(builder);
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
 
-			builder.HasDefaultSchema("ntf");
+            builder.HasDefaultSchema("ntf");
 
-			builder.AddConfiguration(new NotificationMap());
-			builder.AddConfiguration(new NotificationActionsMap());
-		}
-	}
+            builder.AddConfiguration(new NotificationMap());
+            builder.AddConfiguration(new NotificationActionsMap());
+        }
+    }
 }
