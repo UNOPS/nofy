@@ -20,8 +20,16 @@
 			var repository = this.fixture.CreateRepository();
 
 			var service = new NotificationService(repository);
-			var n = new Notification("test", "entityType", "entityId", "role", "1", "test", null,
-				new NotificationAction() { ActionLink = "test", Label = "test" });
+			var n = new Notification(
+				"test",
+				"entityType",
+				"entityId",
+				"role",
+				"1",
+				"test",
+				null,
+				new NotificationAction { ActionLink = "test", Label = "test" });
+
 			service.Publish(n);
 		}
 
@@ -33,9 +41,16 @@
 
 			Assert.Throws<ValidationException>(() =>
 			{
-				var n = new Notification("test", "HASIqStELYkMrXDzIkyhAH4ODJ5AIG1zNWvG3RoJLGB9SKnA9aaCwwanHvmd",
-					"HASIqStELYkMrXDzIkyhAH4ODJ5AIG1zNWvG3RoJLGB9SKnA9aaCwwanHvmd", "role", "1", "test", null,
-					new NotificationAction() { ActionLink = "test", Label = "test" });
+				var n = new Notification(
+					"test",
+					"HASIqStELYkMrXDzIkyhAH4ODJ5AIG1zNWvG3RoJLGB9SKnA9aaCwwanHvmd",
+					"HASIqStELYkMrXDzIkyhAH4ODJ5AIG1zNWvG3RoJLGB9SKnA9aaCwwanHvmd",
+					"role",
+					"1",
+					"test",
+					null,
+					new NotificationAction { ActionLink = "test", Label = "test" });
+
 				service.Publish(n);
 			});
 		}
