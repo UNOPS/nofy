@@ -1,15 +1,15 @@
 ﻿namespace Nofy.Core
 {
-    using System;
+	using System;
 
-    public class NotificationException : Exception
-    {
-        public NotificationException(string message) : base(message)
-        {
-        }
+	public class NotificationException : Exception
+	{
+		public NotificationException(string message) : base(message)
+		{
+		}
 
-        public NotificationException(string message, Exception innerException) : base(message, innerException)
-        {
-        }
-    }
+		public NotificationException(string message, Exception innerException) : base(message, innerException)
+		{
+		}
+	}
 }
