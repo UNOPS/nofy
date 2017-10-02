@@ -2,7 +2,7 @@
 {
 	using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-	public abstract class DbEntityConfiguration<TEntity> where TEntity : class
+	internal abstract class DbEntityConfiguration<TEntity> where TEntity : class
 	{
 		public abstract void Configure(EntityTypeBuilder<TEntity> entity);
 	}

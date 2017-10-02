@@ -6,9 +6,16 @@
 
 	internal class NotificationMap : DbEntityConfiguration<Notification>
 	{
+		private readonly string schema;
+
+		public NotificationMap(string schema)
+		{
+			this.schema = schema;
+		}
+
 		public override void Configure(EntityTypeBuilder<Notification> entity)
 		{
-			entity.ToTable("Notification");
+			entity.ToTable("Notification", this.schema);
 			entity.HasKey(t => t.Id);
 			entity.Property(t => t.Id).HasColumnName("Id").UseSqlServerIdentityColumn();
 			entity.Property(t => t.Status).HasColumnName("Status");

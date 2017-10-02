@@ -19,12 +19,10 @@
 		/// <summary>
 		/// Initialize new instance of repository
 		/// </summary>
-		/// <param name="connectionString"></param>
-		public NotificationRepository(string connectionString)
+		/// <param name="context"></param>
+		public NotificationRepository(DataContext context)
 		{
-			var optionsBuilder = new DbContextOptionsBuilder<NotificationsDbContext>();
-			optionsBuilder.UseSqlServer(connectionString);
-			this.DbContext = new NotificationsDbContext(optionsBuilder.Options);
+			this.DbContext = context.DbContext;
 		}
 
 		/// <summary>

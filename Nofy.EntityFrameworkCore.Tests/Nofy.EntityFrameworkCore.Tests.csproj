@@ -2,9 +2,16 @@
 	<PropertyGroup>
 		<TargetFramework>netcoreapp2.0</TargetFramework>
 	</PropertyGroup>
+	<ItemGroup>
+	  <None Remove="appsettings.json" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Content Include="appsettings.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.3" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.0.0" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.0.0" />
@@ -14,7 +21,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Nofy.Core\Nofy.Core.csproj" />
 		<ProjectReference Include="..\Nofy.EntityFrameworkCore\Nofy.EntityFrameworkCore.csproj" />
 	</ItemGroup>
 </Project>

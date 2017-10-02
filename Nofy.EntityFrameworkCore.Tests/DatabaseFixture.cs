@@ -3,7 +3,6 @@
 	using System.IO;
 	using Microsoft.EntityFrameworkCore;
 	using Microsoft.Extensions.Configuration;
-	using Nofy.EntityFrameworkCore.DataAccess;
 
 	public class DatabaseFixture
 	{
@@ -17,19 +16,12 @@
 				.AddJsonFile("appsettings.json")
 				.Build();
 
-			this.options = new DbContextOptionsBuilder().UseSqlServer(this.ConnectionString).Options;
+			this.options = new DbContextOptionsBuilder().UseSqlServer(this.config.GetConnectionString("nofy")).Options;
 		}
 
-		private string ConnectionString => this.config.GetConnectionString("tag");
-
-		public NotificationsDbContext CreateDataContext()
+		public DataContext CreateDataContext()
 		{
-			return new NotificationsDbContext(this.options);
-		}
-
-		public NotificationRepository CreateRepository()
-		{
-			return new NotificationRepository(this.ConnectionString);
+			return new DataContext(this.options);
 		}
 	}
 }

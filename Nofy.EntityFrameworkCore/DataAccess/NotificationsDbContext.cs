@@ -4,15 +4,21 @@
 	using Nofy.Core.Model;
 	using Nofy.EntityFrameworkCore.Mappings;
 
-	public class NotificationsDbContext : DbContext
+	internal class NotificationsDbContext : DbContext
 	{
-		//public NotificationsDbContext()
-		//	: base(new DbContextOptionsBuilder().UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=nofy;Trusted_Connection=True;MultipleActiveResultSets=true").Options)
-		//{
-		//}
+		private const string DefaultConnectionString =
+			"Server=(localdb)\\mssqllocaldb;Database=nofy;Trusted_Connection=True;MultipleActiveResultSets=true";
 
-		public NotificationsDbContext(DbContextOptions options) : base(options)
+		private readonly string schema;
+
+		public NotificationsDbContext()
+			: this(new DbContextOptionsBuilder().UseSqlServer(DefaultConnectionString).Options, "dbo")
 		{
+		}
+
+		public NotificationsDbContext(DbContextOptions options, string schema) : base(options)
+		{
+			this.schema = schema;
 		}
 
 		public virtual DbSet<Notification> Notifications { get; set; }
@@ -21,10 +27,10 @@
 		{
 			base.OnModelCreating(builder);
 
-			builder.HasDefaultSchema("ntf");
+			builder.HasDefaultSchema(this.schema);
 
-			builder.AddConfiguration(new NotificationMap());
-			builder.AddConfiguration(new NotificationActionsMap());
+			builder.AddConfiguration(new NotificationMap(this.schema));
+			builder.AddConfiguration(new NotificationActionsMap(this.schema));
 		}
 	}
 }

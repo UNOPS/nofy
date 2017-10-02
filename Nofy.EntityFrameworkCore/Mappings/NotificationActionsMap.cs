@@ -6,9 +6,16 @@
 
 	internal class NotificationActionsMap : DbEntityConfiguration<NotificationAction>
 	{
+		private readonly string schema;
+
+		public NotificationActionsMap(string schema)
+		{
+			this.schema = schema;
+		}
+
 		public override void Configure(EntityTypeBuilder<NotificationAction> entity)
 		{
-			entity.ToTable("NotificationAction");
+			entity.ToTable("NotificationAction", this.schema);
 			entity.HasKey(t => t.Id);
 			entity.Property(t => t.Id).HasColumnName("Id").UseSqlServerIdentityColumn();
 			entity.Property(t => t.Label).HasColumnName("Label").HasMaxLength(NotificationActionValidation.MaxLabelLength).IsUnicode();

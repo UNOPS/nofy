@@ -5,21 +5,20 @@
 	using Nofy.Core.Model;
 	using Xunit;
 
+	[Collection(nameof(DatabaseCollectionFixture))]
 	public class MagicTest
 	{
 		public MagicTest(DatabaseFixture dbFixture)
 		{
-			this.fixture = dbFixture;
+			this.repository = new NotificationRepository(dbFixture.CreateDataContext());
 		}
 
-		private readonly DatabaseFixture fixture;
+		private readonly INotificationRepository repository;
 
 		[Fact]
-		public void ManipulateDatabase()
+		public void CreateNotification()
 		{
-			var repository = this.fixture.CreateRepository();
-
-			var service = new NotificationService(repository);
+			var service = new NotificationService(this.repository);
 			var n = new Notification(
 				"test",
 				"entityType",
@@ -36,8 +35,7 @@
 		[Fact]
 		public void Validate()
 		{
-			var rep = this.fixture.CreateRepository();
-			var service = new NotificationService(rep);
+			var service = new NotificationService(this.repository);
 
 			Assert.Throws<ValidationException>(() =>
 			{
