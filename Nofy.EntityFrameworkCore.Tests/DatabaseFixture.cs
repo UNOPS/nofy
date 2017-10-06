@@ -6,17 +6,16 @@
 
 	public class DatabaseFixture
 	{
-		private readonly IConfigurationRoot config;
 		private readonly DbContextOptions options;
 
 		public DatabaseFixture()
 		{
-			this.config = new ConfigurationBuilder()
+			var config = new ConfigurationBuilder()
 				.SetBasePath(Directory.GetCurrentDirectory())
 				.AddJsonFile("appsettings.json")
 				.Build();
 
-			this.options = new DbContextOptionsBuilder().UseSqlServer(this.config.GetConnectionString("nofy")).Options;
+			this.options = new DbContextOptionsBuilder().UseSqlServer(config.GetConnectionString("nofy")).Options;
 		}
 
 		public DataContext CreateDataContext()
