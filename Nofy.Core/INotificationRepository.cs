@@ -4,6 +4,9 @@
 	using Nofy.Core.Helper;
 	using Nofy.Core.Model;
 
+	/// <summary>
+	/// Repository interface
+	/// </summary>
 	public interface INotificationRepository
 	{
 		/// <summary>

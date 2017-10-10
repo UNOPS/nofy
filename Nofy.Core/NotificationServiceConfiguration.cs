@@ -1,5 +1,8 @@
 ﻿namespace Nofy.Core
 {
+	/// <summary>
+	/// Notification service configuration class
+	/// </summary>
 	public class NotificationServiceConfiguration
 	{
 		/// <summary>

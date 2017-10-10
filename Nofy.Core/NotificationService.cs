@@ -5,6 +5,7 @@
 	using Nofy.Core.Helper;
 	using Nofy.Core.Model;
 
+	/// <inheritdoc />
 	/// <summary>
 	/// Manage notifications for a repository 
 	/// </summary>
@@ -31,10 +32,15 @@
 			};
 		}
 
-		//Service configurations
+		/// <summary>
+		/// Service configurations
+		/// </summary>
 		public NotificationServiceConfiguration Config { get; set; }
 
-		//Make sure to dispose all resources
+		/// <inheritdoc />
+		/// <summary>
+		/// Dispose all resources
+		/// </summary>
 		public void Dispose()
 		{
 			this.Dispose(true);
@@ -77,21 +83,28 @@
 			return this.notificationRepository.GetNotifications(recipients, pageIndex, pageSize, showArchived);
 		}
 
-		public void Publish(Notification n)
+		/// <summary>
+		/// Publish notifications to user
+		/// </summary>
+		/// <param name="notification"></param>
+		public void Publish(Notification notification)
 		{
 			lock (this.lockKey)
 			{
-				this.notifications.Add(n);
+				this.notifications.Add(notification);
 			}
 
-			if (this.notifications.Count > this.Config.BatchLimit)
+			lock (this.lockKey)
 			{
-				this.SaveBatch();
+				if (this.notifications.Count > this.Config.BatchLimit)
+				{
+					this.SaveBatch();
+				}
 			}
 		}
 
 		/// <summary>
-		/// Unarchive notification by id
+		/// Un-archive notification by id
 		/// </summary>
 		/// <param name="id">Notification id</param>
 		public void UnArchive(int id)
