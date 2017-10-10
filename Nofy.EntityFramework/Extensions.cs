@@ -2,10 +2,27 @@
 {
 	using System;
 	using System.Linq;
+	using LinqKit;
+	using Nofy.Core;
 	using Nofy.Core.Helper;
+	using Nofy.Core.Model;
 
 	internal static class Extensions
 	{
+		public static IQueryable<Notification> BelongingTo(this IQueryable<Notification> queryable, params NotificationRecipient[] filters)
+		{
+			var filter = PredicateBuilder.New<Notification>(true);
+
+			foreach (var recipient in filters)
+			{
+				filter = filter.Or(t => t.RecipientType == recipient.RecipientType && t.RecipientId == recipient.RecipientId);
+			}
+
+			return queryable
+				.AsExpandable()
+				.Where(filter);
+		}
+
 		public static PaginatedData<T> Paginate<T>(
 			this IQueryable<T> query,
 			int pageNum,

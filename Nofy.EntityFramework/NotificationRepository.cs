@@ -84,14 +84,13 @@
 			int pageSize,
 			bool showArchived)
 		{
-			var query = this.DbContext.Notifications.AsQueryable();
+			var query = this.DbContext.Notifications
+				.BelongingTo(recipients.ToArray());
 
 			if (!showArchived)
 			{
 				query = query.Where(t => t.Status != NotificationStatus.Archived);
 			}
-
-			query = query.Where(t => recipients.Contains(new NotificationRecipient(t.RecipientType, t.RecipientId)));
 
 			var data = query
 				.Include(t => t.Actions)
