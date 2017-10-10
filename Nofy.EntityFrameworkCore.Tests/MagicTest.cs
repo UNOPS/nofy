@@ -33,6 +33,21 @@
 		}
 
 		[Fact]
+		public void LoadData()
+		{
+			var service = new NotificationService(this.repository);
+
+			var recepients = new[]
+			{
+				new NotificationRecipient("role", "1")
+			};
+
+			var results = service.GetNotifications(recepients, 1, 10, true);
+
+			Assert.NotEmpty(results.Results);
+		}
+
+		[Fact]
 		public void Validate()
 		{
 			var service = new NotificationService(this.repository);
