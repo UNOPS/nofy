@@ -43,7 +43,6 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -61,7 +60,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".nuget\NuGet.config" />
+    <None Include=".nuget\NuGet.targets" />
     <None Include="App.config" />
+    <None Include="Nofy.EntityFramework.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -75,5 +77,11 @@
       <DependentUpon>201710061138245_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include=".nuget\NuGet.exe" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>$(ProjectDir).nuget\nuget.exe pack $(ProjectPath) -Symbols -Properties Configuration=$(ConfigurationName) -OutputDirectory $(ProjectDir)</PostBuildEvent>
+  </PropertyGroup>
 </Project>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Nofy.EntityFramework</id>
+    <version>0.0.1-beta</version>
+    <authors>UNOPS</authors>
+    <owners>UNOPS</owners>
+    <projectUrl>https://github.com/UNOPS/nofy</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>EF target for Nofy</description>
+    <releaseNotes>Added support for .NETFramework 4.6.1</releaseNotes>
+    <copyright>Copyright 2017 (c) UNOPS. All rights reserved.</copyright>
+    <tags>Notification</tags>
+		<dependencies>
+			<group targetFramework=".NETFramework4.6.1">
+				<dependency id="EntityFramework" version="6.1.3" />
+				<dependency id="Nofy.Core" version="0.1.0-beta" />
+			</group>
+		</dependencies>
+  </metadata>
+</package>
