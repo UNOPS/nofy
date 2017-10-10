@@ -67,18 +67,18 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Nofy.Core\Nofy.Core.csproj">
-      <Project>{3497d98f-b56a-4fcf-b90d-8d0d1742981f}</Project>
-      <Name>Nofy.Core</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Migrations\201710061138245_Init.resx">
       <DependentUpon>201710061138245_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include=".nuget\NuGet.exe" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Nofy.Core\Nofy.Core.csproj">
+      <Project>{3497d98f-b56a-4fcf-b90d-8d0d1742981f}</Project>
+      <Name>Nofy.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
