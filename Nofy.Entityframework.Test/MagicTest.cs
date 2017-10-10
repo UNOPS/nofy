@@ -3,6 +3,7 @@
 	using System.ComponentModel.DataAnnotations;
 	using Microsoft.VisualStudio.TestTools.UnitTesting;
 	using Nofy.Core;
+	using Nofy.Core.Helper;
 	using Nofy.Core.Model;
 	using Nofy.EntityFramework;
 	using TestStack.BDDfy;
@@ -24,6 +25,14 @@
 			new Scenario()
 				.Given(a => a.Validate())
 				.BDDfy("The field EntityId must be a string or array type with a maximum length of '50'");
+		}
+
+		[TestMethod]
+		public void LoadData()
+		{
+			new Scenario()
+				.Given(a => a.LoaData())
+				.BDDfy();
 		}
 	}
 
@@ -67,6 +76,18 @@
 
 				service.Publish(notification);
 			});
+		}
+
+		public PaginatedData<Notification> LoaData()
+		{
+			var service = new NotificationService(this.repository);
+
+			var recepients = new[]
+			{
+				new NotificationRecipient("role", "1")
+			};
+
+			return service.GetNotifications(recepients, 1, 10, true);
 		}
 	}
 }
