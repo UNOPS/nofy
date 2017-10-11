@@ -16,7 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nofy.EntityFrameworkCore.Tests", "Nofy.EntityFrameworkCore.Tests\Nofy.EntityFrameworkCore.Tests.csproj", "{9DC01039-AB5B-482B-9876-0FEF36E922DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nofy.EntityFramework", "Nofy.EntityFramework\Nofy.EntityFramework.csproj", "{CA371124-F7DD-42D2-8506-113DF0A6E86F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nofy.EntityFramework6", "Nofy.EntityFramework\Nofy.EntityFramework6.csproj", "{CA371124-F7DD-42D2-8506-113DF0A6E86F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nofy.Entityframework.Test", "Nofy.Entityframework.Test\Nofy.Entityframework.Test.csproj", "{B4F8AC20-AB18-4BD3-861D-F99611E35991}"
 EndProject

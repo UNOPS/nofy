@@ -1,4 +1,4 @@
-namespace Nofy.EntityFramework.Migrations
+namespace Nofy.EntityFramework6.Migrations
 {
 	using System.Data.Entity.Migrations;
 

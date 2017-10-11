@@ -1,4 +1,4 @@
-﻿namespace Nofy.EntityFramework.Mappings
+﻿namespace Nofy.EntityFramework6.Mappings
 {
 	using System.ComponentModel.DataAnnotations.Schema;
 	using System.Data.Entity.ModelConfiguration;

@@ -1,8 +1,8 @@
-﻿namespace Nofy.EntityFramework.DataAccess
+﻿namespace Nofy.EntityFramework6.DataAccess
 {
 	using System.Data.Entity;
 	using Nofy.Core.Model;
-	using Nofy.EntityFramework.Mappings;
+	using Nofy.EntityFramework6.Mappings;
 
 	internal class NotificationsDbContext : DbContext
 	{

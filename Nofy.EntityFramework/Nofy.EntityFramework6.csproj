@@ -7,8 +7,8 @@
     <ProjectGuid>{CA371124-F7DD-42D2-8506-113DF0A6E86F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Nofy.EntityFramework</RootNamespace>
-    <AssemblyName>Nofy.EntityFramework</AssemblyName>
+    <RootNamespace>Nofy.EntityFramework6</RootNamespace>
+    <AssemblyName>Nofy.EntityFramework6</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

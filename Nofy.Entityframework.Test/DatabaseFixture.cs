@@ -1,7 +1,7 @@
 ﻿namespace Nofy.Entityframework.Test
 {
 	using System.Configuration;
-	using Nofy.EntityFramework;
+	using Nofy.EntityFramework6;
 
 	public class DatabaseFixture
 	{

@@ -1,10 +1,10 @@
-﻿namespace Nofy.EntityFramework
+﻿namespace Nofy.EntityFramework6
 {
 	using System.Data.Entity.Infrastructure;
 	using System.Data.Entity.Migrations;
 	using System.Data.Entity.Migrations.Infrastructure;
 	using System.Linq;
-	using Nofy.EntityFramework.DataAccess;
+	using Nofy.EntityFramework6.DataAccess;
 
 	/// <summary>
 	/// Represents a single unit of work.

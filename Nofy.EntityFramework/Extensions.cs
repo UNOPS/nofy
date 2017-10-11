@@ -1,4 +1,4 @@
-﻿namespace Nofy.EntityFramework
+﻿namespace Nofy.EntityFramework6
 {
 	using System;
 	using System.Linq;

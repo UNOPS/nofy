@@ -1,4 +1,4 @@
-﻿namespace Nofy.EntityFramework
+﻿namespace Nofy.EntityFramework6
 {
 	using System;
 	using System.Collections.Generic;
@@ -7,7 +7,7 @@
 	using Nofy.Core;
 	using Nofy.Core.Helper;
 	using Nofy.Core.Model;
-	using Nofy.EntityFramework.DataAccess;
+	using Nofy.EntityFramework6.DataAccess;
 
 	/// <summary>
 	/// Represent notification repository to manipulate notification data.

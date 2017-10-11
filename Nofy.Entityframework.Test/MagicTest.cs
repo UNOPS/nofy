@@ -5,7 +5,7 @@
 	using Nofy.Core;
 	using Nofy.Core.Helper;
 	using Nofy.Core.Model;
-	using Nofy.EntityFramework;
+	using Nofy.EntityFramework6;
 	using TestStack.BDDfy;
 
 	[TestClass]
