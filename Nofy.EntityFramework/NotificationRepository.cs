@@ -61,13 +61,55 @@
 		}
 
 		/// <summary>
+		/// Update notification status to be read
+		/// </summary>
+		/// <param name="notificationId"></param>
+		/// <returns></returns>
+		public int MarkAsRead(int notificationId)
+		{
+			var notification = this.DbContext.Notifications.Find(notificationId);
+			if (notification == null)
+			{
+				throw new ArgumentNullException(nameof(notification));
+			}
+			if (notification.IsRead())
+			{
+				return -1;
+			}
+			notification.MarkAsRead();
+			return this.DbContext.SaveChanges();
+		}
+
+		/// <summary>
+		/// Update notification status to be unread
+		/// </summary>
+		/// <param name="notificationId"></param>
+		/// <returns></returns>
+		public int MarkAsUnread(int notificationId)
+		{
+			var notification = this.GetNotification(notificationId);
+			
+			if (notification.IsUnread())
+			{
+				return -1;
+			}
+			notification.MarkAsUnread();
+			return this.DbContext.SaveChanges();
+		}
+
+		/// <summary>
 		/// Get notification by Id
 		/// </summary>
 		/// <param name="notificationId"></param>
 		/// <returns></returns>
 		public Notification GetNotification(int notificationId)
 		{
-			return this.DbContext.Notifications.Find(notificationId);
+			var notification =  this.DbContext.Notifications.Find(notificationId);
+			if (notification == null)
+			{
+				throw new ArgumentNullException(nameof(notification));
+			}
+			return notification;
 		}
 
 		/// <summary>

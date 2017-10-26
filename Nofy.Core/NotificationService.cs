@@ -57,6 +57,24 @@
 		}
 
 		/// <summary>
+		/// Update notification status to read.
+		/// </summary>
+		/// <param name="notificationId"></param>
+		public int MarkAsRead(int notificationId)
+		{
+			return this.notificationRepository.MarkAsRead(notificationId);
+		}
+
+		/// <summary>
+		/// Update notification status to unread.
+		/// </summary>
+		/// <param name="notificationId"></param>
+		public int MarkAsUnread(int notificationId)
+		{
+			return this.notificationRepository.MarkAsUnread(notificationId);
+		}
+
+		/// <summary>
 		/// Get notification by id
 		/// </summary>
 		/// <param name="notificationId">Notification id</param>
@@ -65,6 +83,7 @@
 		{
 			return this.notificationRepository.GetNotification(notificationId);
 		}
+
 
 		/// <summary>
 		/// Get paginated list of notifications for list of recipients 

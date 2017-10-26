@@ -1,6 +1,7 @@
 ﻿namespace Nofy.Entityframework.Test
 {
 	using System.ComponentModel.DataAnnotations;
+	using System.Linq;
 	using Microsoft.VisualStudio.TestTools.UnitTesting;
 	using Nofy.Core;
 	using Nofy.Core.Helper;
@@ -17,6 +18,13 @@
 			new Scenario()
 				.Given(a => a.CreateNotification())
 				.BDDfy("Notification is created");
+		}
+
+		[TestMethod]
+		public void MarkAsRead()
+		{
+			new Scenario().Given(a => a.MarkAsRead())
+				.BDDfy("Notification marked as read");
 		}
 
 		[TestMethod]
@@ -88,6 +96,13 @@
 			};
 
 			return service.GetNotifications(recepients, 1, 10, true);
+		}
+
+		public bool MarkAsRead()
+		{
+			var service = new NotificationService(this.repository);
+			var notification = this.LoaData().Results.First();
+			return service.MarkAsRead(notification.Id) > 0;
 		}
 	}
 }
