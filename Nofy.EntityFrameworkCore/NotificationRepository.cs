@@ -87,6 +87,13 @@
 			{
 				return -1;
 			}
+
+			// todo split archiving from un/read status
+			if (notification.IsArchived())
+			{
+				return -1;
+			}
+
 			notification.MarkAsUnread();
 			return this.DbContext.SaveChanges();
 		}

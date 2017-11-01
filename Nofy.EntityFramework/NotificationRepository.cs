@@ -72,6 +72,13 @@
 			{
 				throw new ArgumentNullException(nameof(notification));
 			}
+
+			// todo split archiving from un/read status
+			if (notification.IsArchived())
+			{
+				return -1;
+			}
+
 			if (notification.IsRead())
 			{
 				return -1;

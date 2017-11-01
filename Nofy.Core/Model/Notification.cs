@@ -223,5 +223,14 @@ namespace Nofy.Core.Model
 		{
 			return this.Status == NotificationStatus.UnRead;
 		}
+
+		/// <summary>
+		/// Specify whether notification is archived.
+		/// </summary>
+		/// <returns></returns>
+		public bool IsArchived()
+		{
+			return this.Status == NotificationStatus.Archived;
+		}
 	}
 }
