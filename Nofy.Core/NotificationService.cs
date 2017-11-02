@@ -51,9 +51,36 @@
 		/// Archive notification by id
 		/// </summary>
 		/// <param name="id">Notification id</param>
-		public void Archive(int id)
+		public int Archive(int id)
 		{
-			this.notificationRepository.Archive(id);
+			return this.notificationRepository.Archive(id);
+		}
+
+		/// <summary>
+		/// Get notification by id
+		/// </summary>
+		/// <param name="notificationId">Notification id</param>
+		/// <returns></returns>
+		public Notification GetNotification(int notificationId)
+		{
+			return this.notificationRepository.GetNotification(notificationId);
+		}
+
+		/// <summary>
+		/// Get paginated list of notifications for list of recipients 
+		/// </summary>
+		/// <param name="recipients">List of recipients </param>
+		/// <param name="pageIndex">Page index</param>
+		/// <param name="pageSize">Page size : maximum number of notification to be returned </param>
+		/// <param name="showArchived">Include archived notification in result</param>
+		/// <returns></returns>
+		public PaginatedData<Notification> GetNotifications(
+			IEnumerable<NotificationRecipient> recipients,
+			int pageIndex,
+			int pageSize = 10,
+			bool showArchived = false)
+		{
+			return this.notificationRepository.GetNotifications(recipients, pageIndex, pageSize, showArchived);
 		}
 
 		/// <summary>
@@ -72,34 +99,6 @@
 		public int MarkAsUnread(int notificationId)
 		{
 			return this.notificationRepository.MarkAsUnread(notificationId);
-		}
-
-		/// <summary>
-		/// Get notification by id
-		/// </summary>
-		/// <param name="notificationId">Notification id</param>
-		/// <returns></returns>
-		public Notification GetNotification(int notificationId)
-		{
-			return this.notificationRepository.GetNotification(notificationId);
-		}
-
-
-		/// <summary>
-		/// Get paginated list of notifications for list of recipients 
-		/// </summary>
-		/// <param name="recipients">List of recipients </param>
-		/// <param name="pageIndex">Page index</param>
-		/// <param name="pageSize">Page size : maximum number of notification to be returned </param>
-		/// <param name="showArchived">Include archived notification in result</param>
-		/// <returns></returns>
-		public PaginatedData<Notification> GetNotifications(
-			IEnumerable<NotificationRecipient> recipients,
-			int pageIndex,
-			int pageSize = 10,
-			bool showArchived = false)
-		{
-			return this.notificationRepository.GetNotifications(recipients, pageIndex, pageSize, showArchived);
 		}
 
 		/// <summary>
@@ -126,9 +125,9 @@
 		/// Un-archive notification by id
 		/// </summary>
 		/// <param name="id">Notification id</param>
-		public void UnArchive(int id)
+		public int UnArchive(int id)
 		{
-			this.notificationRepository.UnArchive(id);
+			return this.notificationRepository.UnArchive(id);
 		}
 
 		/// <summary>

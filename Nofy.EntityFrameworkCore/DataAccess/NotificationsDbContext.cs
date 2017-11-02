@@ -7,12 +7,12 @@
 	internal class NotificationsDbContext : DbContext
 	{
 		private const string DefaultConnectionString =
-			"Server=(localdb)\\mssqllocaldb;Database=nofy;Trusted_Connection=True;MultipleActiveResultSets=true";
+			"Server=(localdb)\\mssqllocaldb;Database=corenofy;Trusted_Connection=True;MultipleActiveResultSets=true";
 
 		private readonly string schema;
 
 		public NotificationsDbContext()
-			: this(new DbContextOptionsBuilder().UseSqlServer(DefaultConnectionString).Options, "dbo")
+			: this(new DbContextOptionsBuilder().UseSqlServer(DefaultConnectionString).Options, "ntf")
 		{
 		}
 

@@ -27,18 +27,19 @@
 				schema: "ntf",
 				columns: table => new
 				{
-					Id = table.Column<int>(nullable: false)
+					Id = table.Column<int>(type: "int", nullable: false)
 						.Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-					ArchivedOn = table.Column<DateTime>(nullable: true),
-					Category = table.Column<int>(nullable: true),
-					CreatedOn = table.Column<DateTime>(nullable: false),
-					Description = table.Column<string>(maxLength: 1000, nullable: true),
-					EntityId = table.Column<string>(unicode: false, maxLength: 20, nullable: true),
-					EntityType = table.Column<string>(unicode: false, maxLength: 200, nullable: true),
-					RecipientId = table.Column<string>(unicode: false, maxLength: 50, nullable: true),
-					RecipientType = table.Column<string>(unicode: false, maxLength: 20, nullable: true),
-					Status = table.Column<int>(nullable: false),
-					Summary = table.Column<string>(maxLength: 100, nullable: true)
+					Archived = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
+					ArchivedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+					Category = table.Column<int>(type: "int", nullable: true),
+					CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+					Description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
+					EntityId = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: false),
+					EntityType = table.Column<string>(type: "varchar(200)", unicode: false, maxLength: 200, nullable: true),
+					RecipientId = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: true),
+					RecipientType = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: true),
+					Status = table.Column<int>(type: "int", nullable: false),
+					Summary = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true)
 				},
 				constraints: table => { table.PrimaryKey("PK_Notification", x => x.Id); });
 
@@ -47,11 +48,11 @@
 				schema: "ntf",
 				columns: table => new
 				{
-					Id = table.Column<int>(nullable: false)
+					Id = table.Column<int>(type: "int", nullable: false)
 						.Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-					ActionLink = table.Column<string>(unicode: false, maxLength: 1000, nullable: true),
-					Label = table.Column<string>(maxLength: 50, nullable: true),
-					NotificationId = table.Column<int>(nullable: false)
+					ActionLink = table.Column<string>(type: "varchar(1000)", unicode: false, maxLength: 1000, nullable: true),
+					Label = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+					NotificationId = table.Column<int>(type: "int", nullable: false)
 				},
 				constraints: table =>
 				{

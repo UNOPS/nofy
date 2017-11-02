@@ -24,20 +24,6 @@
 		int Archive(int notificationId);
 
 		/// <summary>
-		/// Update notification status to be read
-		/// </summary>
-		/// <param name="notificationId"></param>
-		/// <returns></returns>
-		int MarkAsRead(int notificationId);
-
-		/// <summary>
-		/// Update the notification status to unread.
-		/// </summary>
-		/// <param name="notificationId"></param>
-		/// <returns></returns>
-		int MarkAsUnread(int notificationId);
-
-		/// <summary>
 		/// Get notification by Id
 		/// </summary>
 		/// <param name="notificationId"></param>
@@ -57,6 +43,20 @@
 			int pageIndex,
 			int pageSize,
 			bool showArchived);
+
+		/// <summary>
+		/// Update notification status to be read
+		/// </summary>
+		/// <param name="notificationId"></param>
+		/// <returns></returns>
+		int MarkAsRead(int notificationId);
+
+		/// <summary>
+		/// Update the notification status to unread.
+		/// </summary>
+		/// <param name="notificationId"></param>
+		/// <returns></returns>
+		int MarkAsUnread(int notificationId);
 
 		/// <summary>
 		/// Undo archive notification

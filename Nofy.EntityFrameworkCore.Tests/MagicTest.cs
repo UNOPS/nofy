@@ -1,7 +1,9 @@
 ﻿namespace Nofy.EntityFrameworkCore.Tests
 {
 	using System.ComponentModel.DataAnnotations;
+	using System.Linq;
 	using Nofy.Core;
+	using Nofy.Core.Helper;
 	using Nofy.Core.Model;
 	using Xunit;
 
@@ -33,7 +35,7 @@
 		}
 
 		[Fact]
-		public void LoadData()
+		public PaginatedData<Notification> LoadData()
 		{
 			var service = new NotificationService(this.repository);
 
@@ -45,6 +47,36 @@
 			var results = service.GetNotifications(recepients, 1, 10, true);
 
 			Assert.NotEmpty(results.Results);
+			return results;
+		}
+
+		[Fact]
+		public void MarkAsArchive()
+		{
+			var service = new NotificationService(this.repository);
+
+			var recepients = new[]
+			{
+				new NotificationRecipient("role", "1")
+			};
+
+			var results = service.GetNotifications(recepients, 1, 10, true);
+			Assert.True(service.Archive(results.Results.First().Id) > 0);
+		}
+
+		[Fact]
+		public void MarkAsRead()
+		{
+			var service = new NotificationService(this.repository);
+
+			var recepients = new[]
+			{
+				new NotificationRecipient("role", "1")
+			};
+
+			var results = service.GetNotifications(recepients, 1, 10, true);
+
+			Assert.True(service.MarkAsRead(results.Results.First().Id) > 0);
 		}
 
 		[Fact]

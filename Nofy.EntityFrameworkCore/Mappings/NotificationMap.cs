@@ -30,6 +30,7 @@
 			entity.Property(t => t.RecipientType).HasColumnName("RecipientType").HasMaxLength(NotificationValidation.MaxRecipientTypeLength)
 				.IsUnicode(false);
 			entity.Property(t => t.Category).HasColumnName("Category");
+			entity.Property(t => t.Archived).HasColumnName("Archived").HasDefaultValue(false);
 		}
 	}
 }

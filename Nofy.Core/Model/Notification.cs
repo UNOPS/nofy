@@ -1,4 +1,5 @@
 ﻿// ReSharper disable VirtualMemberCallInConstructor
+
 namespace Nofy.Core.Model
 {
 	using System;
@@ -41,7 +42,7 @@ namespace Nofy.Core.Model
 			this.CreatedOn = DateTime.UtcNow;
 			this.Summary = summary;
 			this.Category = category;
-
+			this.Archived = false;
 			var context = new ValidationContext(this, serviceProvider: null, items: null);
 			var results = new List<ValidationResult>();
 
@@ -62,41 +63,46 @@ namespace Nofy.Core.Model
 		/// <summary>
 		/// Get or set the list of actions for notification
 		/// </summary>
-		public virtual ICollection<NotificationAction> Actions { get; set; }
+		public virtual ICollection<NotificationAction> Actions { get; private set; }
+
+		/// <summary>
+		/// Get or set bool value that indecate the notification archived status.
+		/// </summary>
+		public bool Archived { get; private set; }
 
 		/// <summary>
 		/// Get or set the date that notification archived on
 		/// </summary>
-		public DateTime? ArchivedOn { get; set; }
+		public DateTime? ArchivedOn { get; private set; }
 
 		/// <summary>
 		/// Get or set notification category
 		/// </summary>
-		public int? Category { get; set; }
+		public int? Category { get; private set; }
 
 		/// <summary>
 		/// Get or set the creation date .
 		/// </summary>
-		public DateTime CreatedOn { get; set; }
+		public DateTime CreatedOn { get; private set; }
 
 		/// <summary>
 		/// Get or set the notification description
 		/// </summary>
 		[MaxLength(NotificationValidation.MaxDescriptionLength)]
-		public string Description { get; set; }
+		public string Description { get; private set; }
 
 		/// <summary>
 		/// Get or set the related entity id of the notification
 		/// </summary>
 		[Required]
 		[MaxLength(NotificationValidation.MaxEntityIdLength)]
-		public string EntityId { get; set; }
+		public string EntityId { get; private set; }
 
 		/// <summary>
 		/// Get or set the related entity type of the notification
 		/// </summary>
 		[MaxLength(NotificationValidation.MaxEntityTypeLength)]
-		public string EntityType { get; set; }
+		public string EntityType { get; private set; }
 
 		/// <summary>
 		/// Get or set the notificatoin id 
@@ -107,24 +113,24 @@ namespace Nofy.Core.Model
 		/// Get or set the recipient of notification
 		/// </summary>
 		[MaxLength(NotificationValidation.MaxRecipientIdLength)]
-		public string RecipientId { get; set; }
+		public string RecipientId { get; private set; }
 
 		/// <summary>
 		/// Get or set the type of recipient of notification
 		/// </summary>
 		[MaxLength(NotificationValidation.MaxRecipientTypeLength)]
-		public string RecipientType { get; set; }
+		public string RecipientType { get; private set; }
 
 		/// <summary>
 		/// Get or set enum value that indecate the notification status.
 		/// </summary>
-		public NotificationStatus Status { get; set; }
+		public NotificationStatus Status { get; private set; }
 
 		/// <summary>
 		/// Short summery 
 		/// </summary>
 		[MaxLength(NotificationValidation.MaxSummaryLength)]
-		public string Summary { get; set; }
+		public string Summary { get; private set; }
 
 		/// <summary>
 		/// Add new action to notfication actions
@@ -141,12 +147,12 @@ namespace Nofy.Core.Model
 		/// <returns></returns>
 		public bool Archive()
 		{
-			if (this.Status == NotificationStatus.Archived)
+			if (this.Archived)
 			{
 				return false;
 			}
 
-			this.Status = NotificationStatus.Archived;
+			this.Archived = true;
 			this.ArchivedOn = DateTime.UtcNow;
 			return true;
 		}
@@ -175,35 +181,12 @@ namespace Nofy.Core.Model
 		}
 
 		/// <summary>
-		/// Mark as read
-		/// </summary>
-		public void MarkAsRead()
-		{
-			this.Status = NotificationStatus.Read;
-		}
-
-		/// <summary>
-		/// Mark as unread
-		/// </summary>
-		public void MarkAsUnread()
-		{
-			this.Status = NotificationStatus.UnRead;
-		}
-
-		/// <summary>
-		/// Revert notification from archive and mark it as read
+		/// Specify whether notification is archived.
 		/// </summary>
 		/// <returns></returns>
-		public bool UnArchive()
+		public bool IsArchived()
 		{
-			if (this.Status != NotificationStatus.Archived)
-			{
-				return false;
-			}
-
-			this.Status = NotificationStatus.Read;
-			this.ArchivedOn = null;
-			return true;
+			return this.Archived;
 		}
 
 		/// <summary>
@@ -225,12 +208,51 @@ namespace Nofy.Core.Model
 		}
 
 		/// <summary>
-		/// Specify whether notification is archived.
+		/// Mark as read
+		/// </summary>
+		public bool MarkAsRead()
+		{
+			if (this.IsRead())
+			{
+				return false;
+			}
+
+			if (this.IsArchived())
+			{
+				return false;
+			}
+			this.Status = NotificationStatus.Read;
+			return true;
+		}
+
+		/// <summary>
+		/// Mark as unread
+		/// </summary>
+		public bool MarkAsUnread()
+		{
+			if (this.IsUnread())
+			{
+				return false;
+			}
+			this.Status = NotificationStatus.UnRead;
+			return true;
+		}
+
+		/// <summary>
+		/// Revert notification from archive and mark it as read
 		/// </summary>
 		/// <returns></returns>
-		public bool IsArchived()
+		public bool UnArchive()
 		{
-			return this.Status == NotificationStatus.Archived;
+			if (!this.Archived)
+			{
+				return false;
+			}
+
+			this.Status = NotificationStatus.Read;
+			this.Archived = false;
+			this.ArchivedOn = null;
+			return true;
 		}
 	}
 }

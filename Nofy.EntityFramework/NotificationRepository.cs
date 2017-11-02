@@ -44,7 +44,7 @@
 		/// <returns></returns>
 		public int Archive(int notificationId)
 		{
-			var notification = this.DbContext.Notifications.Find(notificationId);
+			var notification = this.GetNotification(notificationId);
 
 			if (notification == null)
 			{
@@ -53,7 +53,6 @@
 
 			if (notification.Archive())
 			{
-				notification.Status = NotificationStatus.Archived;
 				return this.DbContext.SaveChanges();
 			}
 
@@ -67,24 +66,14 @@
 		/// <returns></returns>
 		public int MarkAsRead(int notificationId)
 		{
-			var notification = this.DbContext.Notifications.Find(notificationId);
-			if (notification == null)
+			var notification = this.GetNotification(notificationId);
+
+			if (notification.MarkAsRead())
 			{
-				throw new ArgumentNullException(nameof(notification));
+				return this.DbContext.SaveChanges();
 			}
 
-			// todo split archiving from un/read status
-			if (notification.IsArchived())
-			{
-				return -1;
-			}
-
-			if (notification.IsRead())
-			{
-				return -1;
-			}
-			notification.MarkAsRead();
-			return this.DbContext.SaveChanges();
+			return -1;
 		}
 
 		/// <summary>
@@ -95,7 +84,7 @@
 		public int MarkAsUnread(int notificationId)
 		{
 			var notification = this.GetNotification(notificationId);
-			
+
 			if (notification.IsUnread())
 			{
 				return -1;
@@ -111,7 +100,7 @@
 		/// <returns></returns>
 		public Notification GetNotification(int notificationId)
 		{
-			var notification =  this.DbContext.Notifications.Find(notificationId);
+			var notification = this.DbContext.Notifications.Find(notificationId);
 			if (notification == null)
 			{
 				throw new ArgumentNullException(nameof(notification));
@@ -138,7 +127,7 @@
 
 			if (!showArchived)
 			{
-				query = query.Where(t => t.Status != NotificationStatus.Archived);
+				query = query.Where(t => !t.Archived);
 			}
 
 			var data = query
@@ -160,7 +149,7 @@
 		/// <returns></returns>
 		public int UnArchive(int notificationId)
 		{
-			var notification = this.DbContext.Notifications.Find(notificationId);
+			var notification = this.GetNotification(notificationId);
 
 			if (notification == null)
 			{
@@ -169,7 +158,6 @@
 
 			if (notification.UnArchive())
 			{
-				notification.Status = NotificationStatus.Read;
 				return this.DbContext.SaveChanges();
 			}
 

@@ -2,7 +2,7 @@ namespace Nofy.EntityFramework6.Migrations
 {
 	using System.Data.Entity.Migrations;
 
-	public partial class Init : DbMigration
+	public partial class init : DbMigration
 	{
 		public override void Down()
 		{
@@ -19,11 +19,12 @@ namespace Nofy.EntityFramework6.Migrations
 					c => new
 					{
 						Id = c.Int(nullable: false, identity: true),
+						Archived = c.Boolean(nullable: false),
 						ArchivedOn = c.DateTime(),
 						Category = c.Int(),
 						CreatedOn = c.DateTime(nullable: false),
 						Description = c.String(maxLength: 1000),
-						EntityId = c.String(maxLength: 50, unicode: false),
+						EntityId = c.String(nullable: false, maxLength: 50, unicode: false),
 						EntityType = c.String(maxLength: 200, unicode: false),
 						RecipientId = c.String(maxLength: 50, unicode: false),
 						RecipientType = c.String(maxLength: 50, unicode: false),

@@ -53,7 +53,6 @@
 
 			if (notification.Archive())
 			{
-				notification.Status = NotificationStatus.Archived;
 				return this.DbContext.SaveChanges();
 			}
 
@@ -68,10 +67,13 @@
 		public int MarkAsRead(int notificationId)
 		{
 			var notification = this.GetNotification(notificationId);
-			if (notification.IsRead())
-				return -1;
-			notification.MarkAsRead();
-			return this.DbContext.SaveChanges();
+
+			if (notification.MarkAsRead())
+			{
+				return this.DbContext.SaveChanges();
+			}
+
+			return -1;
 		}
 
 		/// <summary>
@@ -83,19 +85,12 @@
 		{
 			var notification = this.GetNotification(notificationId);
 
-			if (notification.IsUnread())
+			if (notification.MarkAsUnread())
 			{
-				return -1;
+				return this.DbContext.SaveChanges();
 			}
 
-			// todo split archiving from un/read status
-			if (notification.IsArchived())
-			{
-				return -1;
-			}
-
-			notification.MarkAsUnread();
-			return this.DbContext.SaveChanges();
+			return -1;
 		}
 
 		/// <summary>
@@ -105,7 +100,7 @@
 		/// <returns></returns>
 		public Notification GetNotification(int notificationId)
 		{
-			var notification =  this.DbContext.Notifications.Find(notificationId);
+			var notification = this.DbContext.Notifications.Find(notificationId);
 			if (notification == null)
 			{
 				throw new ArgumentNullException(nameof(notification));
@@ -132,7 +127,7 @@
 
 			if (!showArchived)
 			{
-				query = query.Where(t => t.Status != NotificationStatus.Archived);
+				query = query.Where(t => !t.Archived);
 			}
 
 			var data = query
@@ -163,7 +158,6 @@
 
 			if (notification.UnArchive())
 			{
-				notification.Status = NotificationStatus.Read;
 				return this.DbContext.SaveChanges();
 			}
 

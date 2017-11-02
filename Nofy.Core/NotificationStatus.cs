@@ -14,10 +14,5 @@
 		/// Read notification
 		/// </summary>
 		Read = 1,
-
-		/// <summary>
-		/// Archived notification
-		/// </summary>
-		Archived = 2
 	}
 }

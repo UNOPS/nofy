@@ -25,7 +25,6 @@
 
 		protected override void OnModelCreating(DbModelBuilder builder)
 		{
-
 			base.OnModelCreating(builder);
 
 			builder.HasDefaultSchema(this.schema);
