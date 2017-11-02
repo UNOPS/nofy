@@ -163,5 +163,15 @@
 
 			return -1;
 		}
+
+		/// <summary>
+		/// Return number of unread notifications for specific recipients.
+		/// </summary>
+		/// <param name="recipients"></param>
+		/// <returns></returns>
+		public int NotReadNotificationCount(IEnumerable<NotificationRecipient> recipients)
+		{
+			return this.DbContext.Notifications.BelongingTo(recipients.ToArray()).Count(t => t.Status == NotificationStatus.UnRead);
+		}
 	}
 }

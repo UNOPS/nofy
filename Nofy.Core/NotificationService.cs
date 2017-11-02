@@ -32,6 +32,8 @@
 			};
 		}
 
+
+
 		/// <summary>
 		/// Service configurations
 		/// </summary>
@@ -82,6 +84,17 @@
 		{
 			return this.notificationRepository.GetNotifications(recipients, pageIndex, pageSize, showArchived);
 		}
+
+		/// <summary>
+		/// Return number of unread notifications for specific recipients.
+		/// </summary>
+		/// <param name="recipients"></param>
+		/// <returns></returns>
+		public int GetNotificationCounter(IEnumerable<NotificationRecipient> recipients)
+		{
+			return this.notificationRepository.NotReadNotificationCount(recipients);
+		}
+
 
 		/// <summary>
 		/// Update notification status to read.

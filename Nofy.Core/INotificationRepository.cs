@@ -64,5 +64,12 @@
 		/// <param name="notificationId"></param>
 		/// <returns></returns>
 		int UnArchive(int notificationId);
+
+		/// <summary>
+		/// Return number of unread notifications for specific recipients.
+		/// </summary>
+		/// <param name="recipients"></param>
+		/// <returns></returns>
+		int NotReadNotificationCount(IEnumerable<NotificationRecipient> recipients);
 	}
 }
