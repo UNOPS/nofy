@@ -217,10 +217,6 @@ namespace Nofy.Core.Model
 				return false;
 			}
 
-			if (this.IsArchived())
-			{
-				return false;
-			}
 			this.Status = NotificationStatus.Read;
 			return true;
 		}

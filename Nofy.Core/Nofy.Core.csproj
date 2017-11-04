@@ -11,17 +11,16 @@
 		<Description>Nofy is a very simple .NET Standard library to help manage notifications inside your app. This package includes core functionality without any storage implementation.</Description>
 		<PackageProjectUrl>https://github.com/UNOPS/Nofy</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/UNOPS/Nofy</RepositoryUrl>
-		<PackageReleaseNotes>Added support for .NET Framework 4.6.1
-</PackageReleaseNotes>
+		<PackageReleaseNotes>Fixing bugs</PackageReleaseNotes>
 		<NeutralLanguage>English (United States)</NeutralLanguage>
 		
 	</PropertyGroup>
 
 	<PropertyGroup>
 		<DocumentationFile>bin\$(Configuration)\$(Platform)\Nofy.Core.xml</DocumentationFile>
-		<Version>0.7.0-beta</Version>
-		<AssemblyVersion>0.7.0.0</AssemblyVersion>
-		<FileVersion>0.7.0.0</FileVersion>
+		<Version>0.7.1-beta</Version>
+		<AssemblyVersion>0.7.1.0</AssemblyVersion>
+		<FileVersion>0.7.1.0</FileVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
