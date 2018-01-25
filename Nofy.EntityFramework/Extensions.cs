@@ -19,7 +19,6 @@
 			}
 
 			return queryable
-				.AsExpandable()
 				.Where(filter);
 		}
 
