@@ -32,7 +32,7 @@ namespace Nofy.Core.Model
 			int? category,
 			params NotificationAction[] actions)
 		{
-			this.Description = description;
+			this.Description = description.Substring(0, NotificationServiceConfiguration.DescriptionLimit);
 			this.EntityType = entityType;
 			this.EntityId = entityId;
 			this.RecipientType = recipientType;
