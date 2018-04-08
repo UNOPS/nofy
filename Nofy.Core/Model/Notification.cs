@@ -40,7 +40,7 @@ namespace Nofy.Core.Model
 			this.Actions = actions?.ToList() ?? new List<NotificationAction>();
 			this.Status = NotificationStatus.UnRead;
 			this.CreatedOn = DateTime.UtcNow;
-			this.Summary = summary;
+			this.Summary = summary.Substring(0, NotificationServiceConfiguration.SummaryLimit);
 			this.Category = category;
 			this.Archived = false;
 			var context = new ValidationContext(this, serviceProvider: null, items: null);

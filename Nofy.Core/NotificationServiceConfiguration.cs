@@ -14,5 +14,11 @@
         /// Set the length limitation for description field
         /// </summary>
         public static int DescriptionLimit { set; get; } = 1000;
-    }
+
+
+        /// <summary>
+        /// Set the length limitation for summary field
+        /// </summary>
+        public static int SummaryLimit { get; set; } = 100;
+	}
 }
