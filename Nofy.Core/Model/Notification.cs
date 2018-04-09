@@ -6,8 +6,9 @@ namespace Nofy.Core.Model
 	using System.Collections.Generic;
 	using System.ComponentModel.DataAnnotations;
 	using System.Linq;
+    using Nofy.Core.Helper;
 
-	/// <summary>
+    /// <summary>
 	/// Represent notification object
 	/// </summary>
 	public class Notification
@@ -32,7 +33,7 @@ namespace Nofy.Core.Model
 			int? category,
 			params NotificationAction[] actions)
 		{
-			this.Description = description.Substring(0, NotificationServiceConfiguration.DescriptionLimit);
+			this.Description = description.EnsureLength(NotificationServiceConfiguration.DescriptionLimit);
 			this.EntityType = entityType;
 			this.EntityId = entityId;
 			this.RecipientType = recipientType;
@@ -40,7 +41,7 @@ namespace Nofy.Core.Model
 			this.Actions = actions?.ToList() ?? new List<NotificationAction>();
 			this.Status = NotificationStatus.UnRead;
 			this.CreatedOn = DateTime.UtcNow;
-			this.Summary = summary.Substring(0, NotificationServiceConfiguration.SummaryLimit);
+			this.Summary = summary.EnsureLength(NotificationServiceConfiguration.SummaryLimit);
 			this.Category = category;
 			this.Archived = false;
 			var context = new ValidationContext(this, serviceProvider: null, items: null);
