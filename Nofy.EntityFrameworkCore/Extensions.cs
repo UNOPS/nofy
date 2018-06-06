@@ -1,6 +1,7 @@
 ﻿namespace Nofy.EntityFrameworkCore
 {
 	using System;
+	using System.Collections.Generic;
 	using System.Linq;
 	using LinqKit;
 	using Microsoft.EntityFrameworkCore;
@@ -42,6 +43,16 @@
 
 			//Total result count
 			var rowsCount = query.Count();
+
+			// Return empty list if there is no data
+			if (rowsCount <= 0)
+			{
+				return new PaginatedData<T>
+				{
+					Results = new List<T>(),
+					TotalCount = rowsCount
+				};
+			}
 
 			//If page number should be > 0 else set to first page
 			if (rowsCount <= pageSize || pageNum <= 0)
