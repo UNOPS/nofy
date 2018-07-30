@@ -75,14 +75,16 @@
 		/// <param name="pageIndex">Page index</param>
 		/// <param name="pageSize">Page size : maximum number of notification to be returned </param>
 		/// <param name="showArchived">Include archived notification in result</param>
+		/// <param name="title"></param>
 		/// <returns></returns>
 		public PaginatedData<Notification> GetNotifications(
 			IEnumerable<NotificationRecipient> recipients,
 			int pageIndex,
 			int pageSize = 10,
-			bool showArchived = false)
+			bool showArchived = false, 
+			string title = "")
 		{
-			return this.notificationRepository.GetNotifications(recipients, pageIndex, pageSize, showArchived);
+			return this.notificationRepository.GetNotifications(recipients, pageIndex, pageSize, showArchived, title);
 		}
 
 		/// <summary>

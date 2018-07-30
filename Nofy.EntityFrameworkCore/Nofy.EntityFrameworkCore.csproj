@@ -3,21 +3,22 @@
 	<PropertyGroup>
 		<TargetFrameworks>netstandard1.4;netstandard2.0</TargetFrameworks>
 		<PackageId>Nofy.EntityFrameworkCore</PackageId>
-		<PackageVersion>0.7.3-beta</PackageVersion>
+		<PackageVersion>0.7.4-beta</PackageVersion>
 		<Authors>UNOPS</Authors>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 		<Copyright>Copyright 2017 (c) UNOPS. All rights reserved.</Copyright>
 		<Description>Nofy is a very simple .NET Standard library to help you manage notifications inside your app. This package includes implementation entity framework.</Description>
 		<RepositoryUrl>https://github.com/unops/nofy</RepositoryUrl>
-		<Version>0.7.3-beta</Version>
-		<PackageReleaseNotes></PackageReleaseNotes>
+		<Version>0.7.4-beta</Version>
+		<PackageReleaseNotes>Search by title (description, summary)</PackageReleaseNotes>
 	</PropertyGroup>
 
 	<PropertyGroup>
 		<DocumentationFile>bin\$(Configuration)\$(Platform)\Nofy.EntityFrameworkCore.xml</DocumentationFile>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<AssemblyVersion>0.7.3.0</AssemblyVersion>
-		<FileVersion>0.7.3.0</FileVersion>
+		<AssemblyVersion>0.7.4.0</AssemblyVersion>
+		<FileVersion>0.7.4.0</FileVersion>
+		<PackageProjectUrl>https://github.com/unops/nofy</PackageProjectUrl>
 	</PropertyGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">

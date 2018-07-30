@@ -44,7 +44,7 @@
 				new NotificationRecipient("role", "1")
 			};
 
-			var results = service.GetNotifications(recepients, 1, 10, true);
+			var results = service.GetNotifications(recepients, 1, 10, true, "test");
 
 			Assert.NotEmpty(results.Results);
 			return results;

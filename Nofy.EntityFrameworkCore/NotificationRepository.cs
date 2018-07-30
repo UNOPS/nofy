@@ -115,12 +115,13 @@
 		/// <param name="pageIndex"></param>
 		/// <param name="pageSize"></param>
 		/// <param name="showArchived"></param>
+		/// <param name="title"></param>
 		/// <returns></returns>
-		public PaginatedData<Notification> GetNotifications(
-			IEnumerable<NotificationRecipient> recipients,
+		public PaginatedData<Notification> GetNotifications(IEnumerable<NotificationRecipient> recipients,
 			int pageIndex,
 			int pageSize,
-			bool showArchived)
+			bool showArchived,
+			string title = "")
 		{
 			var query = this.DbContext.Notifications
 				.BelongingTo(recipients.ToArray());
@@ -129,7 +130,10 @@
 			{
 				query = query.Where(t => !t.Archived);
 			}
-
+			if (!string.IsNullOrEmpty(title))
+			{
+				query = query.Where(a => a.Summary.Contains(title) || a.Description.Contains(title));
+			}
 			var data = query
 				.Include(t => t.Actions)
 				.OrderByDescending(n => n.Id)

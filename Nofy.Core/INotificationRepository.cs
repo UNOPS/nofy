@@ -37,12 +37,14 @@
 		/// <param name="pageIndex"></param>
 		/// <param name="pageSize"></param>
 		/// <param name="showArchived"></param>
+		/// <param name="title"></param>
 		/// <returns></returns>
 		PaginatedData<Notification> GetNotifications(
 			IEnumerable<NotificationRecipient> recipients,
 			int pageIndex,
 			int pageSize,
-			bool showArchived);
+			bool showArchived, 
+			string title = "");
 
 		/// <summary>
 		/// Update notification status to be read
